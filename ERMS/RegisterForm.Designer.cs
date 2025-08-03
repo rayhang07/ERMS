@@ -29,9 +29,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            PnlWelcomePanel = new Panel();
-            LblWelcomeMessage = new Label();
             PnlRegister = new Panel();
+            PbLogo = new PictureBox();
             PbEmailIcon = new PictureBox();
             TxtConfirmPassword = new TextBox();
             pictureBox2 = new PictureBox();
@@ -46,37 +45,14 @@
             BtnRegisterForm = new Button();
             BtnRegister = new Button();
             TxtUsername = new TextBox();
-            PbLogo = new PictureBox();
-            PnlWelcomePanel.SuspendLayout();
             PnlRegister.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)PbLogo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)PbEmailIcon).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)PbPasswordIcon).BeginInit();
             ((System.ComponentModel.ISupportInitialize)PbUserIcon).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)PbLogo).BeginInit();
             SuspendLayout();
-            // 
-            // PnlWelcomePanel
-            // 
-            PnlWelcomePanel.BackColor = Color.FromArgb(128, 64, 0);
-            PnlWelcomePanel.Controls.Add(LblWelcomeMessage);
-            PnlWelcomePanel.Dock = DockStyle.Left;
-            PnlWelcomePanel.Location = new Point(0, 0);
-            PnlWelcomePanel.Name = "PnlWelcomePanel";
-            PnlWelcomePanel.Size = new Size(718, 1061);
-            PnlWelcomePanel.TabIndex = 1;
-            // 
-            // LblWelcomeMessage
-            // 
-            LblWelcomeMessage.AutoSize = true;
-            LblWelcomeMessage.Font = new Font("Segoe UI", 24F, FontStyle.Bold);
-            LblWelcomeMessage.ForeColor = Color.White;
-            LblWelcomeMessage.Location = new Point(140, 480);
-            LblWelcomeMessage.Name = "LblWelcomeMessage";
-            LblWelcomeMessage.Size = new Size(465, 45);
-            LblWelcomeMessage.TabIndex = 0;
-            LblWelcomeMessage.Text = "Track Your Students Progress.";
             // 
             // PnlRegister
             // 
@@ -95,12 +71,24 @@
             PnlRegister.Controls.Add(BtnRegisterForm);
             PnlRegister.Controls.Add(BtnRegister);
             PnlRegister.Controls.Add(TxtUsername);
-            PnlRegister.Dock = DockStyle.Right;
-            PnlRegister.Location = new Point(721, 0);
+            PnlRegister.Dock = DockStyle.Fill;
+            PnlRegister.Location = new Point(0, 0);
+            PnlRegister.Margin = new Padding(0);
             PnlRegister.Name = "PnlRegister";
-            PnlRegister.Size = new Size(1203, 1061);
+            PnlRegister.Size = new Size(1879, 1061);
             PnlRegister.TabIndex = 2;
             PnlRegister.Paint += PnlRegister_Paint;
+            // 
+            // PbLogo
+            // 
+            PbLogo.BackgroundImage = Properties.Resources.logo;
+            PbLogo.BackgroundImageLayout = ImageLayout.Zoom;
+            PbLogo.ErrorImage = Properties.Resources.logo;
+            PbLogo.Location = new Point(980, 0);
+            PbLogo.Name = "PbLogo";
+            PbLogo.Size = new Size(218, 161);
+            PbLogo.TabIndex = 10;
+            PbLogo.TabStop = false;
             // 
             // PbEmailIcon
             // 
@@ -259,43 +247,26 @@
             TxtUsername.Size = new Size(462, 39);
             TxtUsername.TabIndex = 0;
             // 
-            // PbLogo
-            // 
-            PbLogo.BackgroundImage = Properties.Resources.logo;
-            PbLogo.BackgroundImageLayout = ImageLayout.Zoom;
-            PbLogo.ErrorImage = Properties.Resources.logo;
-            PbLogo.Location = new Point(982, 0);
-            PbLogo.Name = "PbLogo";
-            PbLogo.Size = new Size(218, 161);
-            PbLogo.TabIndex = 10;
-            PbLogo.TabStop = false;
-            // 
             // RegisterForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1924, 1061);
+            ClientSize = new Size(1879, 1061);
             Controls.Add(PnlRegister);
-            Controls.Add(PnlWelcomePanel);
             Name = "RegisterForm";
             Text = "RegisterForm";
-            PnlWelcomePanel.ResumeLayout(false);
-            PnlWelcomePanel.PerformLayout();
             PnlRegister.ResumeLayout(false);
             PnlRegister.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)PbLogo).EndInit();
             ((System.ComponentModel.ISupportInitialize)PbEmailIcon).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)PbPasswordIcon).EndInit();
             ((System.ComponentModel.ISupportInitialize)PbUserIcon).EndInit();
-            ((System.ComponentModel.ISupportInitialize)PbLogo).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
-
-        private Panel PnlWelcomePanel;
-        private Label LblWelcomeMessage;
         private Panel PnlRegister;
         private PictureBox PbPasswordIcon;
         private PictureBox PbUserIcon;

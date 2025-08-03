@@ -4,10 +4,12 @@ namespace ERMS
 {
     public partial class LoginForm : Form
     {
-        public LoginForm()
+        private StartupForm mainForm;
+        public LoginForm(StartupForm form)
         {
            InitializeComponent();
-           this.Load += LoginForm_Load;
+           mainForm= form;
+          
 
         }
        
@@ -46,51 +48,15 @@ namespace ERMS
         }
 
         private void BtnRegisterForm_Click(object sender, EventArgs e)
-        {   
+        {
+
+            mainForm.OpenChildForm(new RegisterForm(mainForm));
+            this.TopLevel = false;
             
-            RegisterForm registerForm = new RegisterForm(this);
-            registerForm.Show();
-            this.Hide();
-           
         }
    
-    private async void LoginForm_Load(object sender, EventArgs e)
-        {
-            string[] messages = new string[]
-            {
-                "Welcome to ERMS!",
-                "Manage Your Exams Easily.",
-                "Track Your Students’ Progress."
-            };
-
-            await TypewriterCycle(LblWelcomeMessage, messages);
-        }
-
-        private async Task TypewriterCycle(Label label, string[] messages, int typeDelay = 70, int pauseDelay = 1500)
-        {
-            while (true)  // Infinite loop to cycle messages
-            {
-                foreach (string message in messages)
-                {
-                    // Type out the message
-                    label.Text = "";
-                    foreach (char c in message)
-                    {
-                        label.Text += c;
-                        await Task.Delay(typeDelay);
-                    }
-
-                    await Task.Delay(pauseDelay);  // Pause after typing
-
-                    // Delete the message
-                    while (label.Text.Length > 0)
-                    {
-                        label.Text = label.Text.Substring(0, label.Text.Length - 1);
-                        await Task.Delay(typeDelay);
-                    }
-                }
-            }
-        }
+    
+       
     }
 }
 

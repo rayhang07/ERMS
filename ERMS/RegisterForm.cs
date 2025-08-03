@@ -12,52 +12,16 @@ namespace ERMS
 {
     public partial class RegisterForm : Form
     {
-        private LoginForm _loginForm;
-        public RegisterForm(LoginForm loginForm)
+        private StartupForm mainForm;
+        public RegisterForm(StartupForm form)
         {
             InitializeComponent();
-            _loginForm = loginForm;
-            this.Load += RegisterForm_Load;
+            mainForm = form;
+
         }
 
        
-        private async void RegisterForm_Load(object sender, EventArgs e)
-        {
-            string[] messages = new string[]
-            {
-                "Welcome to ERMS!",
-                "Manage Your Exams Easily.",
-                "Track Your Students’ Progress."
-            };
-
-            await TypewriterCycle(LblWelcomeMessage, messages);
-        }
-
-        private async Task TypewriterCycle(Label label, string[] messages, int typeDelay = 70, int pauseDelay = 1500)
-        {
-            while (true)  // Infinite loop to cycle messages
-            {
-                foreach (string message in messages)
-                {
-                    // Type out the message
-                    label.Text = "";
-                    foreach (char c in message)
-                    {
-                        label.Text += c;
-                        await Task.Delay(typeDelay);
-                    }
-
-                    await Task.Delay(pauseDelay);  // Pause after typing
-
-                    // Delete the message
-                    while (label.Text.Length > 0)
-                    {
-                        label.Text = label.Text.Substring(0, label.Text.Length - 1);
-                        await Task.Delay(typeDelay);
-                    }
-                }
-            }
-        }
+    
     
 
 
@@ -67,6 +31,8 @@ namespace ERMS
             {
                 e.Graphics.DrawLine(thickPen, 350, 780, 982, 780);
             }
+            
+
         }
 
         private void TxtPassword_TextChanged(object sender, EventArgs e)
@@ -76,8 +42,9 @@ namespace ERMS
 
         private void BtnLoginForm_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            _loginForm.Show();
+            mainForm.OpenChildForm(new LoginForm(mainForm));
+            this.TopLevel = false;
+            
         }
 
         private void CbShowPassword_CheckedChanged(object sender, EventArgs e)
