@@ -64,6 +64,7 @@
             PnlContainer.Name = "PnlContainer";
             PnlContainer.Size = new Size(1206, 1061);
             PnlContainer.TabIndex = 3;
+            PnlContainer.Paint += PnlContainer_Paint;
             // 
             // StartupForm
             // 
@@ -72,6 +73,7 @@
             ClientSize = new Size(1924, 1061);
             Controls.Add(PnlContainer);
             Controls.Add(PnlWelcomePanel);
+            MinimumSize = new Size(900, 650);
             Name = "StartupForm";
             Text = "StartupForm";
             PnlWelcomePanel.ResumeLayout(false);

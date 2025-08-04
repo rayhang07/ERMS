@@ -17,7 +17,11 @@ namespace ERMS
         public StartupForm()
         {
             InitializeComponent();
+
+            // Attach the Load event handler method 'StarupForm_Load'
             this.Load += StartupForm_Load;
+
+            // Immediately loads the LoginForm in the panel container, so it is shown by default on startup
             OpenChildForm(new LoginForm(this));
         }
         public void OpenChildForm(Form childForm)
@@ -28,12 +32,12 @@ namespace ERMS
 
             activeForm = childForm;
 
-            // Configure child form to be embedded
+            // Configure child form to be embedded to fill the panel container
             childForm.TopLevel = false;
             childForm.FormBorderStyle = FormBorderStyle.None;
             childForm.Dock = DockStyle.Fill;
 
-            // Clear existing controls and add the new child form
+            // Clear existing controls and add the new child form within the panel container
             PnlContainer.Controls.Clear();
             PnlContainer.Controls.Add(childForm);
 
@@ -51,6 +55,7 @@ namespace ERMS
 
         private async void StartupForm_Load(object sender, EventArgs e)
         {
+            // Stores 3 messages in a list for the dynamic welcome message
             string[] messages = new string[]
             {
                 "Welcome to ERMS!",
@@ -63,11 +68,11 @@ namespace ERMS
 
         private async Task TypewriterCycle(Label label, string[] messages, int typeDelay = 70, int pauseDelay = 1500)
         {
-            while (true)  // Infinite loop to cycle messages
-            {
+            // Infinite loop to cycle messages
+            while (true)
                 foreach (string message in messages)
                 {
-                    // Type out the message
+                    // Type out the message letter by letter
                     label.Text = "";
                     foreach (char c in message)
                     {
@@ -75,16 +80,22 @@ namespace ERMS
                         await Task.Delay(typeDelay);
                     }
 
-                    await Task.Delay(pauseDelay);  // Pause after typing
+                    // Pause after typing out the message
+                    await Task.Delay(pauseDelay);
 
-                    // Delete the message
+                    // Delete the message letter by letter
                     while (label.Text.Length > 0)
                     {
                         label.Text = label.Text.Substring(0, label.Text.Length - 1);
                         await Task.Delay(typeDelay);
                     }
                 }
-            }
+        }
+
+        private void PnlContainer_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
+

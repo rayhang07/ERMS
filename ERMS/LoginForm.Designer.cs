@@ -103,6 +103,7 @@
             BtnLoginForm.TabIndex = 4;
             BtnLoginForm.Text = "Login";
             BtnLoginForm.UseVisualStyleBackColor = false;
+            BtnLoginForm.Click += BtnLoginForm_Click;
             // 
             // TxtPassword
             // 
@@ -159,7 +160,6 @@
             PnlLogin.Controls.Add(BtnRegisterForm);
             PnlLogin.Controls.Add(BtnLogin);
             PnlLogin.Controls.Add(TxtUsername);
-            PnlLogin.Dock = DockStyle.Fill;
             PnlLogin.Location = new Point(0, 0);
             PnlLogin.Margin = new Padding(0);
             PnlLogin.Name = "PnlLogin";
@@ -173,6 +173,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1924, 1061);
             Controls.Add(PnlLogin);
+            FormBorderStyle = FormBorderStyle.None;
             Name = "LoginForm";
             Text = "LoginForm";
             ((System.ComponentModel.ISupportInitialize)PbUserIcon).EndInit();
