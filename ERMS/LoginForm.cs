@@ -6,11 +6,11 @@ namespace ERMS
     {
         // Reference to the main StartupForm to allow communication between the register form and the parent container
         private StartupForm mainForm;
+        
         public LoginForm(StartupForm form)
         {
             InitializeComponent();
-            SetPlaceholder(TxtUsername, "Username");
-            SetPlaceholder(TxtPassword, "Password", isPassword: true);
+            TxtPassword.UseSystemPasswordChar = true;
 
 
 
@@ -25,53 +25,7 @@ namespace ERMS
             this.ActiveControl = null;
         }
 
-        public void SetPlaceholder(TextBox textBox, string placeholderText, bool isPassword = false)
-        {
-            char originalPasswordChar = textBox.PasswordChar;
-            bool isShowingPlaceholder = true;
 
-            // Apply initial placeholder
-            void ShowPlaceholder()
-            {
-                textBox.Text = placeholderText;
-                textBox.ForeColor = Color.FromArgb(245, 245, 245);
-                if (isPassword)
-                {
-                    textBox.UseSystemPasswordChar = false;
-                }
-                isShowingPlaceholder = true;
-            }
-
-            void HidePlaceholder()
-            {
-                textBox.Text = "";
-                textBox.ForeColor = Color.White;
-                if (isPassword)
-                {
-                    textBox.UseSystemPasswordChar = true;
-                }
-                isShowingPlaceholder = false;
-            }
-
-            // Set initial placeholder on startup
-            ShowPlaceholder();
-
-            textBox.Enter += (sender, e) =>
-            {
-                if (isShowingPlaceholder)
-                {
-                    HidePlaceholder();
-                }
-            };
-
-            textBox.Leave += (sender, e) =>
-            {
-                if (string.IsNullOrWhiteSpace(textBox.Text))
-                {
-                    ShowPlaceholder();
-                }
-            };
-        }
 
 
 
@@ -118,10 +72,13 @@ namespace ERMS
 
         }
 
-        private void BtnLoginForm_Click(object sender, EventArgs e)
+        private void BtnLogin_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            MainApplicationForm mainApplicationForm = new MainApplicationForm();
+            
+            mainForm.Hide();
+
+
+            MainApplicationForm mainApplicationForm = new MainApplicationForm(mainForm);
             mainApplicationForm.Show();
         }
     }

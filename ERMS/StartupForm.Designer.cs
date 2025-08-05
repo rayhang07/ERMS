@@ -41,7 +41,7 @@
             PnlWelcomePanel.Dock = DockStyle.Left;
             PnlWelcomePanel.Location = new Point(0, 0);
             PnlWelcomePanel.Name = "PnlWelcomePanel";
-            PnlWelcomePanel.Size = new Size(718, 1061);
+            PnlWelcomePanel.Size = new Size(718, 911);
             PnlWelcomePanel.TabIndex = 2;
             PnlWelcomePanel.Paint += PnlWelcomePanel_Paint;
             // 
@@ -62,7 +62,7 @@
             PnlContainer.Dock = DockStyle.Fill;
             PnlContainer.Location = new Point(718, 0);
             PnlContainer.Name = "PnlContainer";
-            PnlContainer.Size = new Size(1206, 1061);
+            PnlContainer.Size = new Size(1166, 911);
             PnlContainer.TabIndex = 3;
             PnlContainer.Paint += PnlContainer_Paint;
             // 
@@ -70,10 +70,10 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1924, 1061);
+            ClientSize = new Size(1884, 911);
             Controls.Add(PnlContainer);
             Controls.Add(PnlWelcomePanel);
-            MinimumSize = new Size(900, 650);
+            MinimumSize = new Size(1900, 950);
             Name = "StartupForm";
             Text = "StartupForm";
             PnlWelcomePanel.ResumeLayout(false);

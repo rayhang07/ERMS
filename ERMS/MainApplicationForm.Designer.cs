@@ -28,7 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainApplicationForm));
             PnlSideMenu = new Panel();
+            PbLogout = new PictureBox();
+            BtnLogout = new Button();
             BtnMyAccount = new Button();
             BtnStudentRankings = new Button();
             BtnReport = new Button();
@@ -43,16 +46,22 @@
             BtnClasses = new Button();
             BtnDashboard = new Button();
             PnlMenuIcon = new Panel();
+            PbMenuIcon = new PictureBox();
             PnlContainer = new Panel();
             PnlSideMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)PbLogout).BeginInit();
             PnlGradeBookSubMenu.SuspendLayout();
             PnlClassesSubMenu.SuspendLayout();
+            PnlMenuIcon.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)PbMenuIcon).BeginInit();
             SuspendLayout();
             // 
             // PnlSideMenu
             // 
             PnlSideMenu.AutoScroll = true;
             PnlSideMenu.BackColor = Color.FromArgb(128, 64, 0);
+            PnlSideMenu.Controls.Add(PbLogout);
+            PnlSideMenu.Controls.Add(BtnLogout);
             PnlSideMenu.Controls.Add(BtnMyAccount);
             PnlSideMenu.Controls.Add(BtnStudentRankings);
             PnlSideMenu.Controls.Add(BtnReport);
@@ -65,8 +74,33 @@
             PnlSideMenu.Dock = DockStyle.Left;
             PnlSideMenu.Location = new Point(0, 0);
             PnlSideMenu.Name = "PnlSideMenu";
-            PnlSideMenu.Size = new Size(307, 659);
+            PnlSideMenu.Size = new Size(307, 805);
             PnlSideMenu.TabIndex = 0;
+            // 
+            // PbLogout
+            // 
+            PbLogout.BackgroundImage = Properties.Resources.profile;
+            PbLogout.BackgroundImageLayout = ImageLayout.Zoom;
+            PbLogout.Dock = DockStyle.Bottom;
+            PbLogout.Location = new Point(0, 705);
+            PbLogout.Name = "PbLogout";
+            PbLogout.Size = new Size(307, 50);
+            PbLogout.TabIndex = 8;
+            PbLogout.TabStop = false;
+            // 
+            // BtnLogout
+            // 
+            BtnLogout.Dock = DockStyle.Bottom;
+            BtnLogout.FlatAppearance.BorderSize = 0;
+            BtnLogout.FlatStyle = FlatStyle.Flat;
+            BtnLogout.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            BtnLogout.Location = new Point(0, 755);
+            BtnLogout.Name = "BtnLogout";
+            BtnLogout.Size = new Size(307, 50);
+            BtnLogout.TabIndex = 7;
+            BtnLogout.Text = "Logout";
+            BtnLogout.UseVisualStyleBackColor = true;
+            BtnLogout.Click += BtnLogout_Click;
             // 
             // BtnMyAccount
             // 
@@ -266,25 +300,36 @@
             // 
             // PnlMenuIcon
             // 
+            PnlMenuIcon.Controls.Add(PbMenuIcon);
             PnlMenuIcon.Dock = DockStyle.Top;
             PnlMenuIcon.Location = new Point(0, 0);
             PnlMenuIcon.Name = "PnlMenuIcon";
             PnlMenuIcon.Size = new Size(307, 95);
             PnlMenuIcon.TabIndex = 0;
             // 
+            // PbMenuIcon
+            // 
+            PbMenuIcon.BackgroundImage = (Image)resources.GetObject("PbMenuIcon.BackgroundImage");
+            PbMenuIcon.BackgroundImageLayout = ImageLayout.Zoom;
+            PbMenuIcon.Location = new Point(0, 3);
+            PbMenuIcon.Name = "PbMenuIcon";
+            PbMenuIcon.Size = new Size(41, 31);
+            PbMenuIcon.TabIndex = 0;
+            PbMenuIcon.TabStop = false;
+            // 
             // PnlContainer
             // 
             PnlContainer.Dock = DockStyle.Fill;
             PnlContainer.Location = new Point(307, 0);
             PnlContainer.Name = "PnlContainer";
-            PnlContainer.Size = new Size(810, 659);
+            PnlContainer.Size = new Size(810, 805);
             PnlContainer.TabIndex = 1;
             // 
             // MainApplicationForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1117, 659);
+            ClientSize = new Size(1117, 805);
             Controls.Add(PnlContainer);
             Controls.Add(PnlSideMenu);
             ForeColor = Color.White;
@@ -293,8 +338,11 @@
             Text = "MainApplicationForm";
             Load += MainApplicationForm_Load;
             PnlSideMenu.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)PbLogout).EndInit();
             PnlGradeBookSubMenu.ResumeLayout(false);
             PnlClassesSubMenu.ResumeLayout(false);
+            PnlMenuIcon.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)PbMenuIcon).EndInit();
             ResumeLayout(false);
         }
 
@@ -316,5 +364,8 @@
         private Button BtnStudentRankings;
         private Button BtnReport;
         private Panel PnlContainer;
+        private PictureBox PbLogout;
+        private Button BtnLogout;
+        private PictureBox PbMenuIcon;
     }
 }

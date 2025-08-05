@@ -17,11 +17,9 @@ namespace ERMS
         public RegisterForm(StartupForm form)
         {
             InitializeComponent();
-            SetPlaceholder(TxtUsername, "Username");
-            SetPlaceholder(TxtPassword, "Password", isPassword: true);
-            SetPlaceholder(TxtEmail, "Email");
-            SetPlaceholder(TxtName, "Name");
-            SetPlaceholder(TxtConfirmPassword, "Confirm Password", isPassword: true);
+            TxtPassword.UseSystemPasswordChar = true;
+            TxtConfirmPassword.UseSystemPasswordChar = true;
+            
 
             // Stores the passed in reference to the main StartupForm so this child form can interact with it later
             mainForm = form;
@@ -44,53 +42,7 @@ namespace ERMS
 
         }
 
-        public void SetPlaceholder(TextBox textBox, string placeholderText, bool isPassword = false)
-        {
-            char originalPasswordChar = textBox.PasswordChar;
-            bool isShowingPlaceholder = true;
-
-            // Apply initial placeholder
-            void ShowPlaceholder()
-            {
-                textBox.Text = placeholderText;
-                textBox.ForeColor = Color.FromArgb(245, 245, 245); 
-                if (isPassword)
-                {
-                    textBox.UseSystemPasswordChar = false;
-                }
-                isShowingPlaceholder = true;
-            }
-
-            void HidePlaceholder()
-            {
-                textBox.Text = "";
-                textBox.ForeColor = Color.White;
-                if (isPassword)
-                {
-                    textBox.UseSystemPasswordChar = true;
-                }
-                isShowingPlaceholder = false;
-            }
-
-            // Set initial placeholder on startup
-            ShowPlaceholder();
-
-            textBox.Enter += (sender, e) =>
-            {
-                if (isShowingPlaceholder)
-                {
-                    HidePlaceholder();
-                }
-            };
-
-            textBox.Leave += (sender, e) =>
-            {
-                if (string.IsNullOrWhiteSpace(textBox.Text))
-                {
-                    ShowPlaceholder();
-                }
-            };
-        }
+        
 
         private void TxtPassword_TextChanged(object sender, EventArgs e)
         {

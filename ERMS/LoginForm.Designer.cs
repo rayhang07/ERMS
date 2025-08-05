@@ -51,6 +51,7 @@
             TxtUsername.ForeColor = Color.White;
             TxtUsername.Location = new Point(435, 520);
             TxtUsername.Name = "TxtUsername";
+            TxtUsername.PlaceholderText = "Username";
             TxtUsername.Size = new Size(462, 39);
             TxtUsername.TabIndex = 0;
             TxtUsername.TextChanged += TxtUsername_TextChanged;
@@ -66,6 +67,7 @@
             BtnLogin.TabIndex = 1;
             BtnLogin.Text = "Login";
             BtnLogin.UseVisualStyleBackColor = false;
+            BtnLogin.Click += BtnLogin_Click;
             // 
             // BtnRegisterForm
             // 
@@ -103,7 +105,6 @@
             BtnLoginForm.TabIndex = 4;
             BtnLoginForm.Text = "Login";
             BtnLoginForm.UseVisualStyleBackColor = false;
-            BtnLoginForm.Click += BtnLoginForm_Click;
             // 
             // TxtPassword
             // 
@@ -112,6 +113,7 @@
             TxtPassword.ForeColor = Color.White;
             TxtPassword.Location = new Point(435, 577);
             TxtPassword.Name = "TxtPassword";
+            TxtPassword.PlaceholderText = "Password";
             TxtPassword.Size = new Size(462, 39);
             TxtPassword.TabIndex = 5;
             TxtPassword.UseSystemPasswordChar = true;
@@ -160,6 +162,7 @@
             PnlLogin.Controls.Add(BtnRegisterForm);
             PnlLogin.Controls.Add(BtnLogin);
             PnlLogin.Controls.Add(TxtUsername);
+            PnlLogin.Dock = DockStyle.Fill;
             PnlLogin.Location = new Point(0, 0);
             PnlLogin.Margin = new Padding(0);
             PnlLogin.Name = "PnlLogin";

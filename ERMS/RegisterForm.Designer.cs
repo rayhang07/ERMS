@@ -72,6 +72,7 @@
             PnlRegister.Controls.Add(BtnRegister);
             PnlRegister.Controls.Add(TxtUsername);
             PnlRegister.Dock = DockStyle.Fill;
+            PnlRegister.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             PnlRegister.Location = new Point(0, 0);
             PnlRegister.Margin = new Padding(0);
             PnlRegister.Name = "PnlRegister";
@@ -108,6 +109,7 @@
             TxtConfirmPassword.ForeColor = Color.White;
             TxtConfirmPassword.Location = new Point(435, 579);
             TxtConfirmPassword.Name = "TxtConfirmPassword";
+            TxtConfirmPassword.PlaceholderText = "Confirm Password";
             TxtConfirmPassword.Size = new Size(462, 39);
             TxtConfirmPassword.TabIndex = 14;
             TxtConfirmPassword.UseSystemPasswordChar = true;
@@ -141,6 +143,7 @@
             TxtName.ForeColor = Color.White;
             TxtName.Location = new Point(435, 396);
             TxtName.Name = "TxtName";
+            TxtName.PlaceholderText = "Name";
             TxtName.Size = new Size(462, 39);
             TxtName.TabIndex = 11;
             // 
@@ -151,6 +154,7 @@
             TxtEmail.ForeColor = Color.White;
             TxtEmail.Location = new Point(435, 486);
             TxtEmail.Name = "TxtEmail";
+            TxtEmail.PlaceholderText = "Email";
             TxtEmail.Size = new Size(462, 39);
             TxtEmail.TabIndex = 10;
             // 
@@ -183,6 +187,7 @@
             TxtPassword.ForeColor = Color.White;
             TxtPassword.Location = new Point(435, 531);
             TxtPassword.Name = "TxtPassword";
+            TxtPassword.PlaceholderText = "Password";
             TxtPassword.Size = new Size(462, 39);
             TxtPassword.TabIndex = 5;
             TxtPassword.UseSystemPasswordChar = true;
@@ -244,6 +249,7 @@
             TxtUsername.ForeColor = Color.White;
             TxtUsername.Location = new Point(435, 441);
             TxtUsername.Name = "TxtUsername";
+            TxtUsername.PlaceholderText = "Username";
             TxtUsername.Size = new Size(462, 39);
             TxtUsername.TabIndex = 0;
             // 
