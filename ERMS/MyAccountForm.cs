@@ -36,12 +36,14 @@ namespace ERMS
             
             if (CbShowPassword.Checked)
             {
+                // Shows password
                 TxtNewPassword.UseSystemPasswordChar = false;
                 TxtConfirmPassword.UseSystemPasswordChar = false;
                 TxtCurrentPassword.UseSystemPasswordChar = false;  
             }
             else
             {
+                // Hides password
                 TxtCurrentPassword.UseSystemPasswordChar = true;
                 TxtNewPassword.UseSystemPasswordChar = true;
                 TxtConfirmPassword.UseSystemPasswordChar = true;

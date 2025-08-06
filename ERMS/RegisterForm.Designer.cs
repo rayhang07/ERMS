@@ -241,6 +241,7 @@
             BtnRegister.TabIndex = 1;
             BtnRegister.Text = "Register";
             BtnRegister.UseVisualStyleBackColor = false;
+            BtnRegister.Click += BtnRegister_Click;
             // 
             // TxtUsername
             // 

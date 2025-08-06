@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <PackageReference Include="iTextSharp" Version="5.5.13.4" />
+    <PackageReference Include="System.Data.OleDb" Version="9.0.8" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,6 +26,15 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Database\ERMS Database.accdb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Database\ERMS.accdb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

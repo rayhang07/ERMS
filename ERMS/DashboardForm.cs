@@ -25,7 +25,7 @@ namespace ERMS
         {
             InitializeComponent();
 
-            
+
             this.Resize += (s, e) => this.Invalidate();
         }
 

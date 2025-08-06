@@ -60,6 +60,7 @@
             TxtSearch.ForeColor = Color.Black;
             TxtSearch.Location = new Point(408, 31);
             TxtSearch.Name = "TxtSearch";
+            TxtSearch.PlaceholderText = "Student";
             TxtSearch.Size = new Size(157, 35);
             TxtSearch.TabIndex = 2;
             // 

@@ -22,6 +22,7 @@ namespace ERMS
         {
             base.OnPaint(e);
 
+            // Creates a list of labels
             List<System.Windows.Forms.Label> myLabels = new List<System.Windows.Forms.Label>
             {
                 LblLastClassDeleted,
@@ -39,6 +40,7 @@ namespace ERMS
 
 
             };
+            // Draws a line around the labels
             LineDrawer.DrawLinesAroundLabels(this, e, myLabels);
         }
     }
