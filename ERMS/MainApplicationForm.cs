@@ -193,6 +193,10 @@ namespace ERMS
             {
 
             }
+            CurrentUser.UserId = 0;
+            CurrentUser.Username = null;
+            CurrentUser.FullName = null;
+            CurrentUser.Email = null;
         }
     }
 }

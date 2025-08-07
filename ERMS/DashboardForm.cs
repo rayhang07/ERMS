@@ -56,7 +56,8 @@ namespace ERMS
         
         private void DashboardForm_Load(object sender, EventArgs e)
         {
-
+            LblWelcomeBackMessage.Text = $"Welcome back {CurrentUser.FullName}";
+            LblWelcomeBackMessage.Left = (this.ClientSize.Width - LblWelcomeBackMessage.Width) / 2;
             // Display the current date in the LblDateTime label as a long date string
             LblDateTime.Text = DateTime.Now.ToString("D");
 

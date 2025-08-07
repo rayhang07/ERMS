@@ -37,7 +37,7 @@
             TxtNewPassword = new TextBox();
             TxtConfirmPassword = new TextBox();
             CbShowPassword = new CheckBox();
-            BtnSaveDelete = new Button();
+            BtnSaveNewPassword = new Button();
             SuspendLayout();
             // 
             // LblMyDetails
@@ -140,24 +140,25 @@
             CbShowPassword.UseVisualStyleBackColor = true;
             CbShowPassword.CheckedChanged += CbShowPassword_CheckedChanged;
             // 
-            // BtnSaveDelete
+            // BtnSaveNewPassword
             // 
-            BtnSaveDelete.BackColor = Color.FromArgb(128, 64, 0);
-            BtnSaveDelete.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            BtnSaveDelete.ForeColor = Color.White;
-            BtnSaveDelete.Location = new Point(529, 233);
-            BtnSaveDelete.Name = "BtnSaveDelete";
-            BtnSaveDelete.Size = new Size(94, 38);
-            BtnSaveDelete.TabIndex = 42;
-            BtnSaveDelete.Text = "Save";
-            BtnSaveDelete.UseVisualStyleBackColor = false;
+            BtnSaveNewPassword.BackColor = Color.FromArgb(128, 64, 0);
+            BtnSaveNewPassword.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            BtnSaveNewPassword.ForeColor = Color.White;
+            BtnSaveNewPassword.Location = new Point(529, 233);
+            BtnSaveNewPassword.Name = "BtnSaveNewPassword";
+            BtnSaveNewPassword.Size = new Size(94, 38);
+            BtnSaveNewPassword.TabIndex = 42;
+            BtnSaveNewPassword.Text = "Save";
+            BtnSaveNewPassword.UseVisualStyleBackColor = false;
+            BtnSaveNewPassword.Click += BtnSaveNewPassword_Click;
             // 
             // MyAccountForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(794, 766);
-            Controls.Add(BtnSaveDelete);
+            Controls.Add(BtnSaveNewPassword);
             Controls.Add(CbShowPassword);
             Controls.Add(TxtConfirmPassword);
             Controls.Add(TxtNewPassword);
@@ -185,6 +186,6 @@
         private TextBox TxtNewPassword;
         private TextBox TxtConfirmPassword;
         private CheckBox CbShowPassword;
-        private Button BtnSaveDelete;
+        private Button BtnSaveNewPassword;
     }
 }

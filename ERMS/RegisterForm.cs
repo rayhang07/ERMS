@@ -12,6 +12,9 @@ using System.Data.OleDb;
 using System.Security.Cryptography;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
+using System.Media;
+using ERMS;
+
 
 
 
@@ -100,7 +103,8 @@ namespace ERMS
             // Call RegisterUser and handle outputs
             if (userService.RegisterUser(name, username, email, password, confirmPassword, out string errorMessage))
             {
-                MessageBox.Show("Registration successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Sound.PlaySuccess();
+                MessageBox.Show("Registration successful!", "Success");
 
                 // Clear the form fields
                 TxtName.Clear();
@@ -112,7 +116,8 @@ namespace ERMS
             else
             {
                 // Show the validation or duplicate error
-                MessageBox.Show(errorMessage, "Registration Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Sound.PlayError();
+                MessageBox.Show(errorMessage, "Registration Failed");
             }
            
 
@@ -134,7 +139,7 @@ namespace ERMS
         }
 
 
-        private OleDbConnection GetOpenConnection()
+        public OleDbConnection GetOpenConnection()
         {
             try
             {
@@ -144,49 +149,110 @@ namespace ERMS
             }
             catch (Exception ex)
             {
-                // Handle or log the exception
-                MessageBox.Show("Database connection failed: " + ex.Message);
+            // Handle or log the exception
+            Sound.PlayError();
+            MessageBox.Show("Database connection failed: " + ex.Message);
                 return null;
+                
             }
         }
-        public bool ValidateInput(string name, string username, string email, string password, string confirmPassword, out string errorMessage)
+    public bool ValidateInput(string name, string username, string email, string password, string confirmPassword, out string errorMessage)
+    {
+        errorMessage = "";
+
+        // Check if any inputs are empty
+        if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(username) ||
+            string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password) || string.IsNullOrWhiteSpace(confirmPassword))
         {
-            errorMessage = "";
-
-            // Checks if any inputs are empty an then throws an error
-            if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(username) ||
-                string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password) || string.IsNullOrWhiteSpace(confirmPassword))
-            {
-                errorMessage = "All fields are required.";
-                return false;
-            }
-
-            // Check password and confirm password match otherwise throws an error
-            if (password != confirmPassword)
-            {
-                errorMessage = "Password and Confirm Password do not match.";
-                return false;
-            }
-
-            // Checks if the email is of a valid type
-            var emailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
-            if (!Regex.IsMatch(email, emailPattern))
-            {
-                errorMessage = "Invalid email format.";
-                return false;
-            }
-
-            // Ensures the password is at least 8 characters and has an upper case letter included
-            if (password.Length < 8 || !Regex.IsMatch(password, @"[A-Z]"))
-            {
-                errorMessage = "Password must be at least 8 characters and contain at least one uppercase letter.";
-                return false;
-            }
-
-            return true;
+            Sound.PlayError();
+            errorMessage = "All fields are required.";
+            return false;
         }
 
-        public string EncryptPassword(string password)
+        // Check email format
+        var emailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+        if (!Regex.IsMatch(email, emailPattern))
+        {
+            Sound.PlayError();
+            errorMessage = "Invalid email format.";
+            return false;
+        }
+
+        // Validate password rules using the new method
+        if (!ValidatePasswordRules(password, confirmPassword, out errorMessage))
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    public bool ValidatePasswordRules(string password, string confirmPassword, out string errorMessage)
+    {
+        errorMessage = "";
+
+        // Check passwords are not empty
+        if (string.IsNullOrWhiteSpace(password) || string.IsNullOrWhiteSpace(confirmPassword))
+        {
+            Sound.PlayError();
+            errorMessage = "Password fields cannot be empty.";
+            return false;
+        }
+
+        // Check passwords match
+        if (password != confirmPassword)
+        {
+            Sound.PlayError();
+            errorMessage = "Password and Confirm Password do not match.";
+            return false;
+        }
+
+        // Check length and uppercase letter
+        if (password.Length < 8 || !Regex.IsMatch(password, @"[A-Z]"))
+        {
+            Sound.PlayError();
+            errorMessage = "Password must be at least 8 characters and contain at least one uppercase letter.";
+            return false;
+        }
+
+        return true;
+    }
+    public string GetPasswordHashFromDb(int userId)
+    {
+        string dbPath = Path.Combine(Application.StartupPath, "Database", "ERMS.accdb");
+        var userService = new UserRegistrationService(dbPath);
+
+
+        using (var conn = userService.GetOpenConnection())
+        {
+            if (conn == null) return null;
+
+            string query = "SELECT PasswordHash FROM Users WHERE UserID = ?";
+
+            using (var cmd = new OleDbCommand(query, conn))
+            {
+                cmd.Parameters.AddWithValue("?", userId);
+
+                var result = cmd.ExecuteScalar();
+                return result?.ToString();  // returns null if no user found
+            }
+        }
+    }
+    public bool UpdateUserPassword(int userId, string newHashedPassword)
+    {
+        using (var conn = GetOpenConnection())
+        {
+            string updateQuery = "UPDATE Users SET PasswordHash = ? WHERE UserID = ?";
+            using (var cmd = new OleDbCommand(updateQuery, conn))
+            {
+                cmd.Parameters.AddWithValue("?", newHashedPassword);
+                cmd.Parameters.AddWithValue("?", userId);
+                return cmd.ExecuteNonQuery() > 0;
+            }
+        }
+    }
+    
+    public string EncryptPassword(string password)
         {
             // Create a random salt for the hash
             byte[] salt = new byte[16];
@@ -250,8 +316,9 @@ namespace ERMS
 
             // Check if user exists
             if (CheckUserExists(username, email))
-            {
-                errorMessage = "Username or Email already exists.";
+        {
+            Sound.PlayError();
+            errorMessage = "Username or Email already exists.";
                 return false;
             }
 

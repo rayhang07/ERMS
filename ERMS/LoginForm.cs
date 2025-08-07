@@ -2,6 +2,9 @@
 using System.Data.OleDb;
 using System.Text;
 using System.Security.Cryptography;
+using Microsoft.VisualBasic.ApplicationServices;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using static System.ComponentModel.Design.ObjectSelectorEditor;
 
 namespace ERMS
 
@@ -90,6 +93,7 @@ namespace ERMS
             // Optional: Validate inputs (you can add your own validateInput method)
             if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
             {
+                Sound.PlayError();
                 MessageBox.Show("Please enter both username and password.");
                 return;
             }
@@ -145,7 +149,8 @@ namespace ERMS
             }
             catch (Exception ex)
             {
-                // Handle the result/error
+                // Handle the result/error 
+                Sound.PlayError();
                 MessageBox.Show("Database connection failed: " + ex.Message, "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
@@ -159,61 +164,86 @@ namespace ERMS
             // Check if account is currently locked due to too many failed attempts
             if (DateTime.Now < lockoutEndTime)
             {
+                Sound.PlayError();
                 message = $"Account is locked. Try again at {lockoutEndTime:T}.";
                 return false;
             }
 
             using (var conn = GetOpenConnection())
             {
-                if (conn == null) 
+                if (conn == null)
                 {
+                    Sound.PlayError();
                     message = "Unable to connect to the database.";
                     return false;
                 }
 
-                // Query to get stored password hash for the given username
-                string query = "SELECT PasswordHash FROM Users WHERE Username = ?";
+                // Selects from the database:
+                string query = "SELECT UserID, Username, FullName, Email, PasswordHash FROM Users WHERE Username = ?";
+
                 using (var cmd = new OleDbCommand(query, conn))
                 {
-                    // Parameterised query for security
                     cmd.Parameters.AddWithValue("?", username);
 
-                    var result = cmd.ExecuteScalar();
-
-                    if (result != null)
+                    using (var reader = cmd.ExecuteReader())
                     {
-                        string storedHashBase64 = result.ToString();
-
-                        // Verify the entered password against the stored hash and salt
-                        if (VerifyPassword(password, storedHashBase64))
+                        if (reader.Read())
                         {
-                            // Successful login: reset attempts and allow login
-                            loginAttempts = 0;
-                            return true;
+                            int userIdFromDb = Convert.ToInt32(reader["UserID"]);
+                            string usernameFromDb = reader["Username"].ToString();
+                            string fullNameFromDb = reader["FullName"].ToString();
+                            string emailFromDb = reader["Email"].ToString();
+                            string storedHashBase64 = reader["PasswordHash"].ToString();
+                          
+
+                            if (VerifyPassword(password, storedHashBase64))
+                            {
+                                // Successful login: reset attempts and set current user info
+                                loginAttempts = 0;
+
+                                CurrentUser.UserId = userIdFromDb;
+                                CurrentUser.Username = usernameFromDb;
+                                CurrentUser.FullName = fullNameFromDb;
+                                CurrentUser.Email = emailFromDb;
+
+                                return true;
+                            }
+                            else
+                            {
+                                // Password incorrect, increment attempts and display error message
+                                loginAttempts++;
+
+                                if (loginAttempts >= 3)
+                                {
+                                    lockoutEndTime = DateTime.Now.AddMinutes(1);
+                                    Sound.PlayError();
+                                    message = "Account locked due to too many failed attempts. Try again in 1 minute.";
+                                }
+                                else
+                                {
+                                    Sound.PlayError();
+                                    message = $"Invalid credentials. Attempt {loginAttempts} of 3.";
+                                }
+
+                                return false;
+                            }
                         }
+                        else
+                        {
+                            // Username not found, attempts don't increment
+                            Sound.PlayError();
+                            message = "User doesn't exist.";
+                            return false;
+                        }
+
                     }
                 }
             }
-
-            // Login failed, add one to login attempts
-            loginAttempts++;
-
-            if (loginAttempts >= 3)
-            {
-                // Lock the account for 1 minute after 3 failed attempts
-                lockoutEndTime = DateTime.Now.AddMinutes(1);
-                message = "Account locked due to too many failed attempts. Try again in 1 minute.";
-            }
-            else
-            {
-                message = $"Invalid credentials. Attempt {loginAttempts} of 3.";
-            }
-
-            return false;
         }
 
+
         // Checks if the password matches the stored password hash
-        private bool VerifyPassword(string password, string storedHashBase64)
+        public bool VerifyPassword(string password, string storedHashBase64)
         {
             // Convert stored Base64 string back to bytes
             byte[] storedBytes = Convert.FromBase64String(storedHashBase64);
@@ -239,7 +269,6 @@ namespace ERMS
                     if (computedHash[i] != storedBytes[i])
                         return false; 
                 }
-
                 return true; 
             }
         }
@@ -247,7 +276,7 @@ namespace ERMS
 
         public void ConfirmLogin(Form startupForm)
         {
-            
+            Sound.PlaySuccess();
             MessageBox.Show("Login successful!");
 
             // Hide the current login form
