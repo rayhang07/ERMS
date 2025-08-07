@@ -13,7 +13,8 @@ namespace ERMS
     public partial class StartupForm : Form
     {
         private Form activeForm = null;
-
+        public int loginAttempts = 0;
+        public DateTime lockoutEndTime = DateTime.MinValue;
         public StartupForm()
         {
             InitializeComponent();
