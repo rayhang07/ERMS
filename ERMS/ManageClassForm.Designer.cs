@@ -36,16 +36,16 @@
             TxtClassNameRemove = new TextBox();
             LblClassNameRemove = new Label();
             BtnSaveAdd = new Button();
-            textBox1 = new TextBox();
+            TxtStudentIDAdd = new TextBox();
             LblStudentIDAdd = new Label();
             TxtStudentNameAdd = new TextBox();
             LblStudentNameAdd = new Label();
             TxtClassNameAdd = new TextBox();
             LblClassNameAdd = new Label();
             BtnSaveDelete = new Button();
-            TxtYearCreate = new TextBox();
-            TxtSubjectCreate = new TextBox();
-            TxtClassNameCreate = new TextBox();
+            TxtYearDelete = new TextBox();
+            TxtSubjectDelete = new TextBox();
+            TxtClassNameDelete = new TextBox();
             LblYearCreate = new Label();
             LblSubjectCreate = new Label();
             LblClassNameCreate = new Label();
@@ -77,6 +77,7 @@
             BtnSaveRemove.TabIndex = 47;
             BtnSaveRemove.Text = "Save";
             BtnSaveRemove.UseVisualStyleBackColor = false;
+            BtnSaveRemove.Click += BtnSaveRemove_Click;
             // 
             // TxtStudentIDRemove
             // 
@@ -149,15 +150,16 @@
             BtnSaveAdd.TabIndex = 40;
             BtnSaveAdd.Text = "Save";
             BtnSaveAdd.UseVisualStyleBackColor = false;
+            BtnSaveAdd.Click += BtnSaveAdd_Click;
             // 
-            // textBox1
+            // TxtStudentIDAdd
             // 
-            textBox1.BackColor = SystemColors.Window;
-            textBox1.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            textBox1.Location = new Point(369, 237);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(100, 27);
-            textBox1.TabIndex = 39;
+            TxtStudentIDAdd.BackColor = SystemColors.Window;
+            TxtStudentIDAdd.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            TxtStudentIDAdd.Location = new Point(369, 237);
+            TxtStudentIDAdd.Name = "TxtStudentIDAdd";
+            TxtStudentIDAdd.Size = new Size(100, 27);
+            TxtStudentIDAdd.TabIndex = 39;
             // 
             // LblStudentIDAdd
             // 
@@ -221,31 +223,32 @@
             BtnSaveDelete.TabIndex = 33;
             BtnSaveDelete.Text = "Save";
             BtnSaveDelete.UseVisualStyleBackColor = false;
+            BtnSaveDelete.Click += BtnSaveDelete_Click;
             // 
-            // TxtYearCreate
+            // TxtYearDelete
             // 
-            TxtYearCreate.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            TxtYearCreate.Location = new Point(369, 95);
-            TxtYearCreate.Name = "TxtYearCreate";
-            TxtYearCreate.Size = new Size(100, 27);
-            TxtYearCreate.TabIndex = 32;
+            TxtYearDelete.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            TxtYearDelete.Location = new Point(369, 95);
+            TxtYearDelete.Name = "TxtYearDelete";
+            TxtYearDelete.Size = new Size(100, 27);
+            TxtYearDelete.TabIndex = 32;
             // 
-            // TxtSubjectCreate
+            // TxtSubjectDelete
             // 
-            TxtSubjectCreate.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            TxtSubjectCreate.Location = new Point(190, 95);
-            TxtSubjectCreate.Name = "TxtSubjectCreate";
-            TxtSubjectCreate.Size = new Size(100, 27);
-            TxtSubjectCreate.TabIndex = 31;
+            TxtSubjectDelete.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            TxtSubjectDelete.Location = new Point(190, 95);
+            TxtSubjectDelete.Name = "TxtSubjectDelete";
+            TxtSubjectDelete.Size = new Size(100, 27);
+            TxtSubjectDelete.TabIndex = 31;
             // 
-            // TxtClassNameCreate
+            // TxtClassNameDelete
             // 
-            TxtClassNameCreate.BackColor = SystemColors.Window;
-            TxtClassNameCreate.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            TxtClassNameCreate.Location = new Point(11, 95);
-            TxtClassNameCreate.Name = "TxtClassNameCreate";
-            TxtClassNameCreate.Size = new Size(100, 27);
-            TxtClassNameCreate.TabIndex = 30;
+            TxtClassNameDelete.BackColor = SystemColors.Window;
+            TxtClassNameDelete.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            TxtClassNameDelete.Location = new Point(11, 95);
+            TxtClassNameDelete.Name = "TxtClassNameDelete";
+            TxtClassNameDelete.Size = new Size(100, 27);
+            TxtClassNameDelete.TabIndex = 30;
             // 
             // LblYearCreate
             // 
@@ -494,16 +497,16 @@
             Controls.Add(TxtClassNameRemove);
             Controls.Add(LblClassNameRemove);
             Controls.Add(BtnSaveAdd);
-            Controls.Add(textBox1);
+            Controls.Add(TxtStudentIDAdd);
             Controls.Add(LblStudentIDAdd);
             Controls.Add(TxtStudentNameAdd);
             Controls.Add(LblStudentNameAdd);
             Controls.Add(TxtClassNameAdd);
             Controls.Add(LblClassNameAdd);
             Controls.Add(BtnSaveDelete);
-            Controls.Add(TxtYearCreate);
-            Controls.Add(TxtSubjectCreate);
-            Controls.Add(TxtClassNameCreate);
+            Controls.Add(TxtYearDelete);
+            Controls.Add(TxtSubjectDelete);
+            Controls.Add(TxtClassNameDelete);
             Controls.Add(LblYearCreate);
             Controls.Add(LblSubjectCreate);
             Controls.Add(LblClassNameCreate);
@@ -526,16 +529,16 @@
         private TextBox TxtClassNameRemove;
         private Label LblClassNameRemove;
         private Button BtnSaveAdd;
-        private TextBox textBox1;
+        private TextBox TxtStudentIDAdd;
         private Label LblStudentIDAdd;
         private TextBox TxtStudentNameAdd;
         private Label LblStudentNameAdd;
         private TextBox TxtClassNameAdd;
         private Label LblClassNameAdd;
         private Button BtnSaveDelete;
-        private TextBox TxtYearCreate;
-        private TextBox TxtSubjectCreate;
-        private TextBox TxtClassNameCreate;
+        private TextBox TxtYearDelete;
+        private TextBox TxtSubjectDelete;
+        private TextBox TxtClassNameDelete;
         private Label LblYearCreate;
         private Label LblSubjectCreate;
         private Label LblClassNameCreate;

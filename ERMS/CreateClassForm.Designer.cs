@@ -43,7 +43,7 @@
             LblStudentNameAdd = new Label();
             TxtStudentNameAdd = new TextBox();
             LblStudentIDAdd = new Label();
-            textBox1 = new TextBox();
+            TxtStudentIDAdd = new TextBox();
             BtnSaveAdd = new Button();
             LblClassNameRemove = new Label();
             TxtClassNameRemove = new TextBox();
@@ -168,6 +168,7 @@
             BtnSaveCreate.TabIndex = 9;
             BtnSaveCreate.Text = "Save";
             BtnSaveCreate.UseVisualStyleBackColor = false;
+            BtnSaveCreate.Click += BtnSaveCreate_Click;
             // 
             // LblClassNameAdd
             // 
@@ -220,14 +221,14 @@
             LblStudentIDAdd.TabIndex = 14;
             LblStudentIDAdd.Text = "Student ID";
             // 
-            // textBox1
+            // TxtStudentIDAdd
             // 
-            textBox1.BackColor = SystemColors.Window;
-            textBox1.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            textBox1.Location = new Point(370, 237);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(100, 27);
-            textBox1.TabIndex = 15;
+            TxtStudentIDAdd.BackColor = SystemColors.Window;
+            TxtStudentIDAdd.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            TxtStudentIDAdd.Location = new Point(370, 237);
+            TxtStudentIDAdd.Name = "TxtStudentIDAdd";
+            TxtStudentIDAdd.Size = new Size(100, 27);
+            TxtStudentIDAdd.TabIndex = 15;
             // 
             // BtnSaveAdd
             // 
@@ -240,6 +241,7 @@
             BtnSaveAdd.TabIndex = 16;
             BtnSaveAdd.Text = "Save";
             BtnSaveAdd.UseVisualStyleBackColor = false;
+            BtnSaveAdd.Click += BtnSaveAdd_Click;
             // 
             // LblClassNameRemove
             // 
@@ -312,6 +314,7 @@
             BtnSaveRemove.TabIndex = 23;
             BtnSaveRemove.Text = "Save";
             BtnSaveRemove.UseVisualStyleBackColor = false;
+            BtnSaveRemove.Click += BtnSaveRemove_Click;
             // 
             // LblLastClassCreated
             // 
@@ -494,7 +497,7 @@
             Controls.Add(TxtClassNameRemove);
             Controls.Add(LblClassNameRemove);
             Controls.Add(BtnSaveAdd);
-            Controls.Add(textBox1);
+            Controls.Add(TxtStudentIDAdd);
             Controls.Add(LblStudentIDAdd);
             Controls.Add(TxtStudentNameAdd);
             Controls.Add(LblStudentNameAdd);
@@ -533,7 +536,7 @@
         private Label LblStudentNameAdd;
         private TextBox TxtStudentNameAdd;
         private Label LblStudentIDAdd;
-        private TextBox textBox1;
+        private TextBox TxtStudentIDAdd;
         private Button BtnSaveAdd;
         private Label LblClassNameRemove;
         private TextBox TxtClassNameRemove;

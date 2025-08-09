@@ -169,12 +169,28 @@ namespace ERMS
             return false;
         }
 
-        // Check email format
+        // Validate email format
         var emailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
         if (!Regex.IsMatch(email, emailPattern))
         {
             Sound.PlayError();
             errorMessage = "Invalid email format.";
+            return false;
+        }
+
+        // Validate name: letters and hyphens only
+        if (!Regex.IsMatch(name, @"^[A-Za-z\-\s]+$"))
+        {
+            Sound.PlayError();
+            errorMessage = "Name can only contain letters and hyphens.";
+            return false;
+        }
+
+        // Validate username: letters, numbers, and hyphens only
+        if (!Regex.IsMatch(username, @"^[A-Za-z0-9\-]+$"))
+        {
+            Sound.PlayError();
+            errorMessage = "Username can only contain letters, numbers, and hyphens.";
             return false;
         }
 
