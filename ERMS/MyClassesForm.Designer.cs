@@ -29,9 +29,11 @@
         private void InitializeComponent()
         {
             CmbSelectClass = new ComboBox();
-            comboBox1 = new ComboBox();
+            CmbSelectSubject = new ComboBox();
             TxtSearch = new TextBox();
             BtnSearch = new Button();
+            DgvMyClasses = new DataGridView();
+            ((System.ComponentModel.ISupportInitialize)DgvMyClasses).BeginInit();
             SuspendLayout();
             // 
             // CmbSelectClass
@@ -43,16 +45,18 @@
             CmbSelectClass.Size = new Size(147, 38);
             CmbSelectClass.TabIndex = 0;
             CmbSelectClass.Text = "Select Class";
+            CmbSelectClass.SelectedIndexChanged += CmbSelectClass_SelectedIndexChanged;
             // 
-            // comboBox1
+            // CmbSelectSubject
             // 
-            comboBox1.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(174, 28);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(163, 38);
-            comboBox1.TabIndex = 1;
-            comboBox1.Text = "Select Subject";
+            CmbSelectSubject.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            CmbSelectSubject.FormattingEnabled = true;
+            CmbSelectSubject.Location = new Point(174, 28);
+            CmbSelectSubject.Name = "CmbSelectSubject";
+            CmbSelectSubject.Size = new Size(163, 38);
+            CmbSelectSubject.TabIndex = 1;
+            CmbSelectSubject.Text = "Select Subject";
+            CmbSelectSubject.SelectedIndexChanged += CmbSelectSubject_SelectedIndexChanged;
             // 
             // TxtSearch
             // 
@@ -75,19 +79,32 @@
             BtnSearch.TabIndex = 3;
             BtnSearch.Text = "Search";
             BtnSearch.UseVisualStyleBackColor = false;
+            BtnSearch.Click += BtnSearch_Click;
+            // 
+            // DgvMyClasses
+            // 
+            DgvMyClasses.BackgroundColor = Color.White;
+            DgvMyClasses.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            DgvMyClasses.Location = new Point(71, 201);
+            DgvMyClasses.Name = "DgvMyClasses";
+            DgvMyClasses.Size = new Size(641, 337);
+            DgvMyClasses.TabIndex = 4;
             // 
             // MyClassesForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoScroll = true;
             ClientSize = new Size(794, 766);
+            Controls.Add(DgvMyClasses);
             Controls.Add(BtnSearch);
             Controls.Add(TxtSearch);
-            Controls.Add(comboBox1);
+            Controls.Add(CmbSelectSubject);
             Controls.Add(CmbSelectClass);
             Name = "MyClassesForm";
             Text = "MyClasses";
             Load += MyClassesForm_Load;
+            ((System.ComponentModel.ISupportInitialize)DgvMyClasses).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -95,8 +112,9 @@
         #endregion
 
         private ComboBox CmbSelectClass;
-        private ComboBox comboBox1;
+        private ComboBox CmbSelectSubject;
         private TextBox TxtSearch;
         private Button BtnSearch;
+        private DataGridView DgvMyClasses;
     }
 }

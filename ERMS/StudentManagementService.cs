@@ -152,7 +152,7 @@ namespace ERMS
             {
                 if (conn == null)
                 {
-                   
+
                     return false;
                 }
 
@@ -165,7 +165,7 @@ namespace ERMS
                     cmd.Parameters.AddWithValue("?", year);
 
                     try
-                    {  
+                    {
                         // Execute the command
                         int rowsAffected = cmd.ExecuteNonQuery();
                         if (rowsAffected > 0)
@@ -228,26 +228,26 @@ namespace ERMS
                 MessageBox.Show("Student ID can only contain numbers.");
                 return false;
             }
+            if (!int.TryParse(studentId, out int studentIdInt))
+            {
+                Sound.PlayError();
+                MessageBox.Show("Student ID is not a valid number.");
+                return false;
+            }
 
             using (var conn = userRegService.GetOpenConnection())
             {
                 if (conn == null)
                 {
-                    
                     return false;
                 }
 
                 // Get ClassID from className
                 int classId = -1;
-
-                // Prepare the SQL query to get ClassID
                 string getClassIdQuery = "SELECT ClassID FROM Class WHERE ClassName = ?";
                 using (var cmd = new OleDbCommand(getClassIdQuery, conn))
                 {
-                    // Add parameter to prevent SQL injection
                     cmd.Parameters.AddWithValue("?", className);
-
-                    // Execute the command to get ClassID
                     var result = cmd.ExecuteScalar();
                     if (result != null)
                     {
@@ -260,54 +260,96 @@ namespace ERMS
                         return false;
                     }
                 }
-                string checkQuery = "SELECT COUNT(*) FROM Students WHERE ClassID = ? AND StudentID = ?";
-                using (var cmd = new OleDbCommand(checkQuery, conn))
+
+                // Normalize studentName (trim whitespace)
+                string normalizedStudentName = studentName.Trim();
+
+                // Check if the student already exists in Students table by StudentID
+                bool studentExists = false;
+                string checkStudentQuery = "SELECT COUNT(*) FROM Students WHERE StudentID = ?";
+                using (var cmd = new OleDbCommand(checkStudentQuery, conn))
                 {
-                    cmd.Parameters.AddWithValue("?", classId);
                     cmd.Parameters.AddWithValue("?", studentId);
-                    int count = (int)cmd.ExecuteScalar();
+                    int count = Convert.ToInt32(cmd.ExecuteScalar());
+                    studentExists = count > 0;
+                }
+
+                // If student does NOT exist, insert student into Students table
+                if (!studentExists)
+                {
+                    string insertStudentQuery = "INSERT INTO Students (StudentName, StudentID) VALUES (?, ?)";
+                    using (var cmd = new OleDbCommand(insertStudentQuery, conn))
+                    {
+                        cmd.Parameters.AddWithValue("?", normalizedStudentName);
+                        cmd.Parameters.AddWithValue("?", studentId);
+
+                        try
+                        {
+                            int rowsAffected = cmd.ExecuteNonQuery();
+                            if (rowsAffected == 0)
+                            {
+                                Sound.PlayError();
+                                MessageBox.Show("Failed to add new student.");
+                                return false;
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Sound.PlayError();
+                            MessageBox.Show("Database error inserting student: " + ex.Message);
+                            return false;
+                        }
+                    }
+                }
+
+                // Check if enrollment already exists (student in class)
+                string checkEnrollmentQuery = "SELECT COUNT(*) FROM StudentClasses WHERE StudentID = ? AND ClassID = ?";
+                using (var cmd = new OleDbCommand(checkEnrollmentQuery, conn))
+                {
+                    cmd.Parameters.AddWithValue("?", studentId);
+                    cmd.Parameters.AddWithValue("?", classId);
+                    int count = Convert.ToInt32(cmd.ExecuteScalar());
                     if (count > 0)
                     {
                         Sound.PlayError();
-                        MessageBox.Show("This student is already in the class.");
+                        MessageBox.Show("This student is already enrolled in this class.");
                         return false;
                     }
                 }
-                // Insert student with the classId
-                string insertStudentQuery = "INSERT INTO Students (StudentName, StudentID, ClassID) VALUES (?, ?, ?)";
-                using (var cmd = new OleDbCommand(insertStudentQuery, conn))
+
+                // Insert enrollment (student-class link)
+                string insertEnrollmentQuery = "INSERT INTO StudentClasses (StudentID, ClassID) VALUES (?, ?)";
+                using (var cmd = new OleDbCommand(insertEnrollmentQuery, conn))
                 {
-                    cmd.Parameters.AddWithValue("?", studentName);
                     cmd.Parameters.AddWithValue("?", studentId);
                     cmd.Parameters.AddWithValue("?", classId);
 
                     try
                     {
-                        // Execute the command to insert the student
                         int rowsAffected = cmd.ExecuteNonQuery();
                         if (rowsAffected > 0)
                         {
                             Sound.PlaySuccess();
-                            MessageBox.Show("Student added successfully!");
+                            MessageBox.Show("Student added to class successfully!");
                             return true;
                         }
                         else
                         {
                             Sound.PlayError();
-                            MessageBox.Show("Insert operation failed.");
+                            MessageBox.Show("Failed to enroll student in class.");
                             return false;
                         }
                     }
                     catch (Exception ex)
                     {
-                        // Catch any exceptions that occur during the operation
                         Sound.PlayError();
-                        MessageBox.Show("Database error: " + ex.Message);
+                        MessageBox.Show("Database error enrolling student: " + ex.Message);
                         return false;
                     }
                 }
             }
         }
+
         public bool RemoveStudent(string className, string studentName, string studentId)
         {
             string dbPath = Path.Combine(Application.StartupPath, "Database", "ERMS.accdb");
@@ -323,7 +365,6 @@ namespace ERMS
 
             // Validate ClassName: letters and numbers only
             if (!Regex.IsMatch(className, @"^[a-zA-Z0-9\s]+$"))
-
             {
                 Sound.PlayError();
                 MessageBox.Show("Class Name can only contain letters and numbers.");
@@ -331,7 +372,7 @@ namespace ERMS
             }
 
             // Validate StudentName: letters, spaces and hyphens only
-            if (!Regex.IsMatch(studentName, @"^[a-zA-Z\-\s ]+$"))
+            if (!Regex.IsMatch(studentName, @"^[a-zA-Z\-\s]+$"))
             {
                 Sound.PlayError();
                 MessageBox.Show("Student Name can only contain letters, spaces and hyphens.");
@@ -350,20 +391,15 @@ namespace ERMS
             {
                 if (conn == null)
                 {
-                    
                     return false;
                 }
 
                 // Get ClassID from className
                 int classId = -1;
-
-                // Prepare the SQL query to get ClassID
                 string getClassIdQuery = "SELECT ClassID FROM Class WHERE ClassName = ?";
                 using (var cmd = new OleDbCommand(getClassIdQuery, conn))
                 {
                     cmd.Parameters.AddWithValue("?", className);
-
-                    // Execute the command to get ClassID
                     var result = cmd.ExecuteScalar();
                     if (result != null)
                     {
@@ -377,41 +413,55 @@ namespace ERMS
                     }
                 }
 
-                // Delete student with matching details for that class
-                string deleteStudentQuery = "DELETE FROM Students WHERE StudentName = ? AND StudentID = ? AND ClassID = ?";
-                using (var cmd = new OleDbCommand(deleteStudentQuery, conn))
+                // Check if the enrollment exists (optional but useful)
+                string checkEnrollmentQuery = "SELECT COUNT(*) FROM StudentClasses WHERE StudentID = ? AND ClassID = ?";
+                using (var cmd = new OleDbCommand(checkEnrollmentQuery, conn))
                 {
-                    cmd.Parameters.AddWithValue("?", studentName);
+                    cmd.Parameters.AddWithValue("?", studentId);
+                    cmd.Parameters.AddWithValue("?", classId);
+                    int count = Convert.ToInt32(cmd.ExecuteScalar());
+                    if (count == 0)
+                    {
+                        Sound.PlayError();
+                        MessageBox.Show("This student is not enrolled in this class.");
+                        return false;
+                    }
+                }
+
+                // Delete the enrollment record (remove student from class)
+                string deleteEnrollmentQuery = "DELETE FROM StudentClasses WHERE StudentID = ? AND ClassID = ?";
+                using (var cmd = new OleDbCommand(deleteEnrollmentQuery, conn))
+                {
                     cmd.Parameters.AddWithValue("?", studentId);
                     cmd.Parameters.AddWithValue("?", classId);
 
                     try
                     {
-                        // Execute the command to delete the student
                         int rowsAffected = cmd.ExecuteNonQuery();
                         if (rowsAffected > 0)
                         {
                             Sound.PlaySuccess();
-                            MessageBox.Show("Student removed successfully!");
+                            MessageBox.Show("Student removed from class successfully!");
                             return true;
                         }
                         else
                         {
                             Sound.PlayError();
-                            MessageBox.Show("No matching student found for this class.");
+                            MessageBox.Show("No matching enrollment found.");
                             return false;
                         }
                     }
+
                     catch (Exception ex)
                     {
-                        // Catch any exceptions that occur during the operation
                         Sound.PlayError();
                         MessageBox.Show("Database error: " + ex.Message);
                         return false;
+
                     }
+
                 }
             }
         }
-
     }
 }
