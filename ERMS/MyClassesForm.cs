@@ -14,15 +14,19 @@ namespace ERMS
 {
     public partial class MyClassesForm : Form
     {
+        // Stores the current user ID for filtering classes and students 
         private int currentUserId = CurrentUser.UserId;
-        private UserRegistrationService userRegService;
+
+        // Service to handle user registration and database operations
+        private UserRegistrationService userRegistrationService;
 
         public MyClassesForm()
         {
             InitializeComponent();
 
+            // Initialize the user registration service with the database path
             string dbPath = Path.Combine(Application.StartupPath, "Database", "ERMS.accdb");
-            userRegService = new UserRegistrationService(dbPath);
+            userRegistrationService = new UserRegistrationService(dbPath);
 
 
         }
@@ -39,17 +43,24 @@ namespace ERMS
 
             DgvMyClasses.AutoGenerateColumns = false;
 
+            // Set column widths
             DgvMyClasses.EnableHeadersVisualStyles = false;
+
+            // Set header styles
             DgvMyClasses.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(128, 64, 0);
+
+            // Set header text color
             DgvMyClasses.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
 
+            // Set default cell styles
             DgvMyClasses.DefaultCellStyle.BackColor = Color.White;
             DgvMyClasses.DefaultCellStyle.ForeColor = Color.Black;
 
+            // Load user classes and subjects into combo boxes
             LoadUserClasses();
             LoadUserSubjects();
 
-            // Optionally load all students for this user initially (no filter)
+            // Load all students for this user initially without any filter
             LoadStudents("", "", "");
         }
 
@@ -57,24 +68,30 @@ namespace ERMS
 
         private void LoadUserClasses()
         {
-            using (var conn = userRegService.GetOpenConnection())
+            using (var conn = userRegistrationService.GetOpenConnection())
             {
                 if (conn == null)
                 {
+                    Sound.PlayError();
                     MessageBox.Show("Failed to connect to the database.");
                     return;
                 }
 
+                // Query to get distinct class names for the current user
                 string query = "SELECT DISTINCT ClassName FROM Class WHERE UserID = ?";
                 using (var cmd = new OleDbCommand(query, conn))
                 {
+                    // Add the current user ID as a parameter to the query
                     cmd.Parameters.AddWithValue("?", currentUserId);
                     using (var reader = cmd.ExecuteReader())
                     {
                         CmbSelectClass.Items.Clear();
-                        CmbSelectClass.Items.Add(""); // allow empty selection
+
+                        // allow empty selection
+                        CmbSelectClass.Items.Add(""); 
                         while (reader.Read())
                         {
+                            // Add each class name to the combo box
                             CmbSelectClass.Items.Add(reader.GetString(0));
                         }
                     }
@@ -84,14 +101,16 @@ namespace ERMS
 
         private void LoadUserSubjects()
         {
-            using (var conn = userRegService.GetOpenConnection())
+            using (var conn = userRegistrationService.GetOpenConnection())
             {
                 if (conn == null)
                 {
+                    Sound.PlayError();
                     MessageBox.Show("Failed to connect to the database.");
                     return;
                 }
 
+                // Query to get distinct subjects for the current user's classes
                 string query = "SELECT DISTINCT Subject FROM Class WHERE UserID = ?";
                 using (var cmd = new OleDbCommand(query, conn))
                 {
@@ -100,9 +119,12 @@ namespace ERMS
                     using (var reader = cmd.ExecuteReader())
                     {
                         CmbSelectSubject.Items.Clear();
-                        CmbSelectSubject.Items.Add(""); // Allow empty selection
+
+                        // Allow empty selection
+                        CmbSelectSubject.Items.Add(""); 
                         while (reader.Read())
                         {
+                            // Add each subject to the combo box
                             CmbSelectSubject.Items.Add(reader.GetString(0));
                         }
                     }
@@ -114,38 +136,43 @@ namespace ERMS
 
         private void LoadStudents(string className, string subject, string studentName)
         {
-            using (var conn = userRegService.GetOpenConnection())
+            using (var conn = userRegistrationService.GetOpenConnection())
             {
                 if (conn == null)
                 {
+                    Sound.PlayError();
                     MessageBox.Show("Failed to connect to the database.");
                     return;
                 }
 
-                // Base query joining Students, StudentClasses, and Class with proper parentheses
+                // Base query joining Students, StudentClasses, and Class 
                 string query = @"
-            SELECT s.StudentName, s.StudentID, c.ClassName, c.Subject, c.ClassYear
-            FROM (Students s
-            INNER JOIN StudentClasses sc ON s.StudentID = sc.StudentID)
-            INNER JOIN Class c ON sc.ClassID = c.ClassID
-            WHERE c.UserID = ?";
+                SELECT s.StudentName, s.StudentID, c.ClassName, c.Subject, c.ClassYear
+                FROM (Students s
+                INNER JOIN StudentClasses sc ON s.StudentID = sc.StudentID)
+                INNER JOIN Class c ON sc.ClassID = c.ClassID
+                WHERE c.UserID = ?";
 
+                // Prepare parameters for the query
                 var parameters = new List<OleDbParameter> { new OleDbParameter("UserID", currentUserId) };
 
                 if (!string.IsNullOrWhiteSpace(className))
                 {
+                    // If class name is provided, filter by class
                     query += " AND c.ClassName = ?";
                     parameters.Add(new OleDbParameter("ClassName", className));
                 }
 
                 if (!string.IsNullOrWhiteSpace(subject))
                 {
+                    // If subject is provided, filter by subject
                     query += " AND c.Subject = ?";
                     parameters.Add(new OleDbParameter("Subject", subject));
                 }
 
                 if (!string.IsNullOrWhiteSpace(studentName))
                 {
+                    // If student name is provided, filter by student name
                     if (string.IsNullOrWhiteSpace(className) && string.IsNullOrWhiteSpace(subject))
                     {
                         // If no class or subject filter, search across all classes for student name
@@ -161,6 +188,7 @@ namespace ERMS
                     }
                     else
                     {
+                        // If class or subject filter is applied, search within those filters
                         query += " AND s.StudentName LIKE ?";
                         parameters.Add(new OleDbParameter("StudentName", $"%{studentName}%"));
                     }
@@ -168,14 +196,18 @@ namespace ERMS
 
                 using (var cmd = new OleDbCommand(query, conn))
                 {
+
+                    // Add the user ID parameter first
                     cmd.Parameters.AddRange(parameters.ToArray());
 
                     using (var reader = cmd.ExecuteReader())
                     {
                         DgvMyClasses.Rows.Clear();
 
+                        // Read the results and populate the DataGridView
                         while (reader.Read())
                         {
+                            // Add each student to the DataGridView
                             DgvMyClasses.Rows.Add(
                                 reader["StudentName"].ToString(),
                                 reader["StudentID"].ToString(),
@@ -214,6 +246,7 @@ namespace ERMS
         {
             string studentSearch = TxtSearch.Text.Trim();
 
+            // Validate the student search input
             if (string.IsNullOrWhiteSpace(studentSearch))
             {
                 Sound.PlayError();
@@ -221,6 +254,7 @@ namespace ERMS
                 return;
             }
 
+            // Check if the student name contains only valid characters (letters, spaces, hyphens)
             if (!Regex.IsMatch(studentSearch, @"^[A-Za-z\s\-]+$"))
             {
                 Sound.PlayError();
