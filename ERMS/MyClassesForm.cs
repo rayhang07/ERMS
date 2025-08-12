@@ -265,9 +265,38 @@ namespace ERMS
             string selectedClass = CmbSelectClass.SelectedItem?.ToString() ?? "";
             string selectedSubject = CmbSelectSubject.SelectedItem?.ToString() ?? "";
 
-            // Filter by class, subject and student name
+            // Check if student exists in the Students table
+            string dbPath = Path.Combine(Application.StartupPath, "Database", "ERMS.accdb");
+            var userRegService = new UserRegistrationService(dbPath);
+
+            using (var conn = userRegService.GetOpenConnection())
+            {
+                if (conn == null)
+                {
+                    Sound.PlayError();
+                    MessageBox.Show("Failed to connect to the database.");
+                    return;
+                }
+
+                string checkStudentQuery = "SELECT COUNT(*) FROM Students WHERE StudentName = ?";
+                using (var cmd = new OleDbCommand(checkStudentQuery, conn))
+                {
+                    cmd.Parameters.AddWithValue("?", studentSearch);
+
+                    int count = (int)cmd.ExecuteScalar();
+                    if (count == 0)
+                    {
+                        Sound.PlayError();
+                        MessageBox.Show("Student does not exist.");
+                        return;
+                    }
+                }
+            }
+
+            // If student exists, proceed with loading students
             LoadStudents(selectedClass, selectedSubject, studentSearch);
         }
+
     }
 
 }

@@ -64,50 +64,119 @@ namespace ERMS
         {
             if (e.CloseReason == CloseReason.UserClosing)
             {
-                // Optional: confirm exit
-                DialogResult result = MessageBox.Show(
-                    "Are you sure you want to exit?",
-                    "Exit Confirmation",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question);
+                bool shouldCheckUnsaved = false;
 
-                if (result == DialogResult.No)
+                Type[] formsToCheck = new Type[]
+                { typeof(CreateClassForm), typeof(ManageClassForm), typeof(ExamResultsForm), typeof(MyAccountForm), typeof(ReportForm)
+                };
+
+                if (activeForm != null)
                 {
-                    e.Cancel = true; // Cancel closing
-                    return;
+                    foreach (var formType in formsToCheck)
+                    {
+                        if (formType.IsInstanceOfType(activeForm))
+                        {
+                            shouldCheckUnsaved = true;
+                            break;
+                        }
+                    }
                 }
 
-                // Exit application (optional, but safe)
+                if (shouldCheckUnsaved && UnsavedChangesService.HasUnsavedChanges(activeForm))
+                {
+                    Sound.PlayError();
+                    var unsavedResult = MessageBox.Show(
+                        "You have unsaved changes. Are you sure you want to exit without saving?",
+                        "Unsaved Changes",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Question
+                    );
+
+                    if (unsavedResult == DialogResult.No)
+                    {   
+                        // Cancel closing
+                        e.Cancel = true; 
+                        return;
+                    }
+                }
+                else
+                {
+                    Sound.PlayError();
+                    var exitResult = MessageBox.Show(
+                        "Are you sure you want to exit?",
+                        "Exit Confirmation",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Question
+                    );
+
+                    if (exitResult == DialogResult.No)
+                    {   
+                        // Cancel closing
+                        e.Cancel = true; 
+                        return;
+                    }
+                }
+
+               
                 Application.Exit();
             }
         }
-
 
 
         // Keeps track of the currently active child form inside the container panel
         private Form activeForm = null;
         private void OpenChildForm(Form childForm)
         {
-            // If there is already an active child form open, close it before opening a new one
             if (activeForm != null)
+            {
+                Type[] formsToCheck = new Type[]
+                {
+            // Checks these forms for unsaved data
+            typeof(CreateClassForm),
+            typeof(ExamResultsForm),
+            typeof(ManageClassForm),
+            typeof(MyAccountForm),
+            typeof(ReportForm)
+                    
+                };
+
+                if (formsToCheck.Contains(activeForm.GetType()))
+                {
+                    bool canClose = UnsavedChangesService.ConfirmCloseIfUnsaved(activeForm);
+                    if (!canClose)
+                    {
+                        // User cancelled switching
+                        return;
+                    }
+                }
+
+                // Close the current form
                 activeForm.Close();
 
-            // Set the new child form as the active form
-            activeForm = childForm;
+                // Check if activeForm is still open (Close can be canceled in FormClosing)
+                if (!activeForm.IsDisposed && activeForm.Visible)
+                {
+                    // Close was canceled, do not switch
+                    return;
+                }
+            }
 
-            // Configure the child form to be embedded inside the parent form
+            // Now open the new child form
+            activeForm = childForm;
             childForm.TopLevel = false;
             childForm.FormBorderStyle = FormBorderStyle.None;
             childForm.Dock = DockStyle.Fill;
 
-            // Add the child form to the panel container controls and set it as the tag for easy access
             PnlContainer.Controls.Add(childForm);
             PnlContainer.Tag = childForm;
 
-            // Bring the child form to the front and show it
             childForm.BringToFront();
             childForm.Show();
         }
+
+
+
+
         private void BtnClasses_Click(object sender, EventArgs e)
         {
             // Drops down the class submenu/hides it
@@ -132,7 +201,7 @@ namespace ERMS
         {
             // Hides all submenus
             HideSubMenu();
-            OpenChildForm(new ReportForm());    
+            OpenChildForm(new ReportForm());
         }
 
         private void BtnStudentRankings_Click(object sender, EventArgs e)
@@ -146,7 +215,7 @@ namespace ERMS
         {
             // Hides all submenus
             HideSubMenu();
-            OpenChildForm(new MyAccountForm()); 
+            OpenChildForm(new MyAccountForm());
         }
 
         private void BtnMyClasses_Click(object sender, EventArgs e)
@@ -166,37 +235,84 @@ namespace ERMS
 
         private void BtnExamResults_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new ExamResultsForm());   
+            OpenChildForm(new ExamResultsForm());
         }
 
         private void BtnResultsAnalytics_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new ResultsAnalyticsForm());  
+            OpenChildForm(new ResultsAnalyticsForm());
         }
 
         private void BtnLogout_Click(object sender, EventArgs e)
         {
-            var result = MessageBox.Show
-                (
-                "Do you want to logout?",         
-                "Confirm Logout",                 
-                MessageBoxButtons.YesNo,          
-                 MessageBoxIcon.Question           
+            bool canLogout = false;
+
+            // List or array of types to check
+            Type[] formsToCheck = new Type[]
+            { typeof(CreateClassForm), typeof(ManageClassForm), typeof(ExamResultsForm), typeof(MyAccountForm), typeof(ReportForm)
+
+                // add any other forms you want to check here
+            };
+
+            bool shouldCheckUnsaved = false;
+
+            if (activeForm != null)
+            {
+                foreach (var formType in formsToCheck)
+                {
+                    if (formType.IsInstanceOfType(activeForm))
+                    {
+                        shouldCheckUnsaved = true;
+                        break;
+                    }
+                }
+            }
+
+            if (shouldCheckUnsaved && UnsavedChangesService.HasUnsavedChanges(activeForm))
+            {
+                Sound.PlayError(); 
+                var unsavedResult = MessageBox.Show(
+                    "You have unsaved changes. Do you want to logout anyway?",
+                    "Unsaved Changes",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question
+                    
                 );
 
-            if (result == DialogResult.Yes)
-            {
-                this.Hide();
-                _startupForm.Show();
+                if (unsavedResult == DialogResult.Yes)
+                    canLogout = true; // User confirmed despite unsaved changes
             }
             else
             {
+                // No unsaved changes, or form doesn't require check - ask regular logout confirmation
+                Sound.PlayError();
+                var logoutResult = MessageBox.Show(
+                    "Do you want to logout?",
+                    "Confirm Logout",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question
+                );
 
+                if (logoutResult == DialogResult.Yes)
+                    canLogout = true;
             }
-            CurrentUser.UserId = 0;
-            CurrentUser.Username = null;
-            CurrentUser.FullName = null;
-            CurrentUser.Email = null;
+
+            if (canLogout)
+            {
+                // Proceed with logout
+                this.Hide();
+                _startupForm.Show();
+
+                // Clear current user data
+                CurrentUser.UserId = 0;
+                CurrentUser.Username = null;
+                CurrentUser.FullName = null;
+                CurrentUser.Email = null;
+            }
+            // else user cancelled logout — do nothing
         }
+
+
     }
+
 }
