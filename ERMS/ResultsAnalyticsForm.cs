@@ -712,6 +712,35 @@ namespace ERMS
                         return;
                     }
                 }
+
+                string checkAssessmentQuery = @"
+                SELECT COUNT(*)
+                FROM ((((Results AS r
+                INNER JOIN StudentClasses AS sc ON r.EnrollmentID = sc.EnrollmentID)
+                INNER JOIN [Class] AS c ON sc.ClassID = c.ClassID)
+                INNER JOIN Students AS s ON sc.StudentID = s.StudentID)
+                INNER JOIN Assessments AS a ON r.AssessmentID = a.AssessmentID)
+                WHERE (s.StudentName = ?) AND (c.ClassName = ?)";
+
+;
+
+
+                using (var cmd = new OleDbCommand(checkAssessmentQuery, conn))
+                {
+                    cmd.Parameters.AddWithValue(" ? ", studentSearch);
+                    cmd.Parameters.AddWithValue("?", selectedClass);
+
+                    int assessmentCount = (int)cmd.ExecuteScalar();
+
+                    if (assessmentCount == 0)
+                    {
+                        Sound.PlayError();
+                        MessageBox.Show("This student has no assessments for the selected class.");
+                        return;
+                    }
+                }
+
+
             }
 
             // If student exists, load the results with filters

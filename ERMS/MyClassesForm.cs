@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.OleDb;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -14,6 +15,7 @@ namespace ERMS
 {
     public partial class MyClassesForm : Form
     {
+        
         // Stores the current user ID for filtering classes and students 
         private int currentUserId = CurrentUser.UserId;
 
@@ -22,6 +24,7 @@ namespace ERMS
 
         public MyClassesForm()
         {
+            this.Resize += resize;
             InitializeComponent();
 
             // Initialize the user registration service with the database path
@@ -62,8 +65,34 @@ namespace ERMS
 
             // Load all students for this user initially without any filter
             LoadStudents("", "", "");
+
+            DgvMyClasses.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            int colCount = DgvMyClasses.Columns.Count;
+            foreach (DataGridViewColumn col in DgvMyClasses.Columns)
+            {
+                col.FillWeight = 100f / colCount;
+            }
         }
 
+
+        private void resize(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Maximized)
+            {
+                // Calculate 60% size
+                int newWidth = (int)(this.ClientSize.Width * 0.6);
+                int newHeight = (int)(this.ClientSize.Height * 0.6);
+
+                // Set DataGridView size
+                DgvMyClasses.Size = new Size(newWidth, newHeight);
+
+                // Center the DataGridView
+                DgvMyClasses.Location = new Point(
+                    (this.ClientSize.Width - DgvMyClasses.Width) / 2,
+                    (this.ClientSize.Height - DgvMyClasses.Height) / 2
+                );
+            }
+        }
 
 
         private void LoadUserClasses()

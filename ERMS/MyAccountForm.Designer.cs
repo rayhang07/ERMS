@@ -53,10 +53,11 @@
             // 
             // LblChangeLoginDetails
             // 
+            LblChangeLoginDetails.Anchor = AnchorStyles.Top;
             LblChangeLoginDetails.AutoSize = true;
             LblChangeLoginDetails.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             LblChangeLoginDetails.ForeColor = Color.Black;
-            LblChangeLoginDetails.Location = new Point(453, 9);
+            LblChangeLoginDetails.Location = new Point(441, 9);
             LblChangeLoginDetails.Name = "LblChangeLoginDetails";
             LblChangeLoginDetails.Size = new Size(221, 30);
             LblChangeLoginDetails.TabIndex = 34;
@@ -97,9 +98,10 @@
             // 
             // TxtCurrentPassword
             // 
+            TxtCurrentPassword.Anchor = AnchorStyles.Top;
             TxtCurrentPassword.BackColor = Color.White;
             TxtCurrentPassword.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            TxtCurrentPassword.Location = new Point(453, 62);
+            TxtCurrentPassword.Location = new Point(441, 62);
             TxtCurrentPassword.Name = "TxtCurrentPassword";
             TxtCurrentPassword.PlaceholderText = "Current Password";
             TxtCurrentPassword.Size = new Size(228, 33);
@@ -108,9 +110,10 @@
             // 
             // TxtNewPassword
             // 
+            TxtNewPassword.Anchor = AnchorStyles.Top;
             TxtNewPassword.BackColor = Color.White;
             TxtNewPassword.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            TxtNewPassword.Location = new Point(453, 111);
+            TxtNewPassword.Location = new Point(441, 111);
             TxtNewPassword.Name = "TxtNewPassword";
             TxtNewPassword.PlaceholderText = "New Password";
             TxtNewPassword.Size = new Size(228, 33);
@@ -119,9 +122,10 @@
             // 
             // TxtConfirmPassword
             // 
+            TxtConfirmPassword.Anchor = AnchorStyles.Top;
             TxtConfirmPassword.BackColor = Color.White;
             TxtConfirmPassword.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            TxtConfirmPassword.Location = new Point(453, 160);
+            TxtConfirmPassword.Location = new Point(441, 160);
             TxtConfirmPassword.Name = "TxtConfirmPassword";
             TxtConfirmPassword.PlaceholderText = "Confirm Password";
             TxtConfirmPassword.Size = new Size(228, 33);
@@ -130,9 +134,10 @@
             // 
             // CbShowPassword
             // 
+            CbShowPassword.Anchor = AnchorStyles.Top;
             CbShowPassword.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             CbShowPassword.ForeColor = SystemColors.ControlText;
-            CbShowPassword.Location = new Point(453, 199);
+            CbShowPassword.Location = new Point(441, 199);
             CbShowPassword.Name = "CbShowPassword";
             CbShowPassword.Size = new Size(187, 28);
             CbShowPassword.TabIndex = 41;
@@ -142,10 +147,11 @@
             // 
             // BtnSaveNewPassword
             // 
+            BtnSaveNewPassword.Anchor = AnchorStyles.Top;
             BtnSaveNewPassword.BackColor = Color.FromArgb(128, 64, 0);
             BtnSaveNewPassword.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             BtnSaveNewPassword.ForeColor = Color.White;
-            BtnSaveNewPassword.Location = new Point(529, 233);
+            BtnSaveNewPassword.Location = new Point(517, 233);
             BtnSaveNewPassword.Name = "BtnSaveNewPassword";
             BtnSaveNewPassword.Size = new Size(94, 38);
             BtnSaveNewPassword.TabIndex = 42;

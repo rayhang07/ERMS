@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainApplicationForm));
             PnlSideMenu = new Panel();
+            PnlNav = new Panel();
             PbLogout = new PictureBox();
             BtnLogout = new Button();
             BtnMyAccount = new Button();
@@ -60,6 +61,7 @@
             // 
             PnlSideMenu.AutoScroll = true;
             PnlSideMenu.BackColor = Color.FromArgb(128, 64, 0);
+            PnlSideMenu.Controls.Add(PnlNav);
             PnlSideMenu.Controls.Add(PbLogout);
             PnlSideMenu.Controls.Add(BtnLogout);
             PnlSideMenu.Controls.Add(BtnMyAccount);
@@ -76,6 +78,14 @@
             PnlSideMenu.Name = "PnlSideMenu";
             PnlSideMenu.Size = new Size(307, 805);
             PnlSideMenu.TabIndex = 0;
+            // 
+            // PnlNav
+            // 
+            PnlNav.BackColor = Color.Gray;
+            PnlNav.Location = new Point(0, 95);
+            PnlNav.Name = "PnlNav";
+            PnlNav.Size = new Size(4, 50);
+            PnlNav.TabIndex = 9;
             // 
             // PbLogout
             // 
@@ -110,6 +120,7 @@
             BtnMyAccount.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             BtnMyAccount.Location = new Point(0, 582);
             BtnMyAccount.Name = "BtnMyAccount";
+            BtnMyAccount.Padding = new Padding(10, 0, 0, 0);
             BtnMyAccount.Size = new Size(307, 50);
             BtnMyAccount.TabIndex = 6;
             BtnMyAccount.Text = "My Account";
@@ -125,6 +136,7 @@
             BtnStudentRankings.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             BtnStudentRankings.Location = new Point(0, 532);
             BtnStudentRankings.Name = "BtnStudentRankings";
+            BtnStudentRankings.Padding = new Padding(10, 0, 0, 0);
             BtnStudentRankings.Size = new Size(307, 50);
             BtnStudentRankings.TabIndex = 5;
             BtnStudentRankings.Text = "Student Rankings";
@@ -140,6 +152,7 @@
             BtnReport.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             BtnReport.Location = new Point(0, 482);
             BtnReport.Name = "BtnReport";
+            BtnReport.Padding = new Padding(10, 0, 0, 0);
             BtnReport.Size = new Size(307, 50);
             BtnReport.TabIndex = 4;
             BtnReport.Text = "Report";
@@ -199,6 +212,7 @@
             BtnGradeBook.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             BtnGradeBook.Location = new Point(0, 337);
             BtnGradeBook.Name = "BtnGradeBook";
+            BtnGradeBook.Padding = new Padding(10, 0, 0, 0);
             BtnGradeBook.Size = new Size(307, 50);
             BtnGradeBook.TabIndex = 3;
             BtnGradeBook.Text = "Gradebook";
@@ -276,6 +290,7 @@
             BtnClasses.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             BtnClasses.Location = new Point(0, 145);
             BtnClasses.Name = "BtnClasses";
+            BtnClasses.Padding = new Padding(10, 0, 0, 0);
             BtnClasses.Size = new Size(307, 50);
             BtnClasses.TabIndex = 2;
             BtnClasses.Text = "Classes";
@@ -291,6 +306,7 @@
             BtnDashboard.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             BtnDashboard.Location = new Point(0, 95);
             BtnDashboard.Name = "BtnDashboard";
+            BtnDashboard.Padding = new Padding(10, 0, 0, 0);
             BtnDashboard.Size = new Size(307, 50);
             BtnDashboard.TabIndex = 1;
             BtnDashboard.Text = "Dashboard";
@@ -333,7 +349,7 @@
             Controls.Add(PnlContainer);
             Controls.Add(PnlSideMenu);
             ForeColor = Color.White;
-            MinimumSize = new Size(950, 600);
+            MinimumSize = new Size(1133, 844);
             Name = "MainApplicationForm";
             Text = "MainApplicationForm";
             Load += MainApplicationForm_Load;
@@ -367,5 +383,6 @@
         private PictureBox PbLogout;
         private Button BtnLogout;
         private PictureBox PbMenuIcon;
+        private Panel PnlNav;
     }
 }

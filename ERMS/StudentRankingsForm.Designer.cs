@@ -35,19 +35,19 @@
             // 
             CmbSelectClass.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             CmbSelectClass.FormattingEnabled = true;
-            CmbSelectClass.Location = new Point(12, 12);
+            CmbSelectClass.Location = new Point(5, 12);
             CmbSelectClass.Name = "CmbSelectClass";
             CmbSelectClass.Size = new Size(135, 38);
             CmbSelectClass.TabIndex = 1;
             CmbSelectClass.Text = "Table";
             // 
-            // StudentRankings
+            // StudentRankingsForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(794, 766);
             Controls.Add(CmbSelectClass);
-            Name = "StudentRankings";
+            Name = "StudentRankingsForm";
             Text = "StudentRankings";
             ResumeLayout(false);
         }

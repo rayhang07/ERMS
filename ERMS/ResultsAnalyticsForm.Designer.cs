@@ -44,7 +44,7 @@
             // 
             CmbSelectClass.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             CmbSelectClass.FormattingEnabled = true;
-            CmbSelectClass.Location = new Point(12, 12);
+            CmbSelectClass.Location = new Point(5, 12);
             CmbSelectClass.Name = "CmbSelectClass";
             CmbSelectClass.Size = new Size(135, 38);
             CmbSelectClass.TabIndex = 0;
@@ -55,7 +55,7 @@
             // 
             CmbSelectAssessment.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             CmbSelectAssessment.FormattingEnabled = true;
-            CmbSelectAssessment.Location = new Point(321, 12);
+            CmbSelectAssessment.Location = new Point(314, 12);
             CmbSelectAssessment.Name = "CmbSelectAssessment";
             CmbSelectAssessment.Size = new Size(201, 38);
             CmbSelectAssessment.TabIndex = 1;
@@ -66,7 +66,7 @@
             // 
             CmbSelectSubject.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             CmbSelectSubject.FormattingEnabled = true;
-            CmbSelectSubject.Location = new Point(153, 12);
+            CmbSelectSubject.Location = new Point(146, 12);
             CmbSelectSubject.Name = "CmbSelectSubject";
             CmbSelectSubject.Size = new Size(162, 38);
             CmbSelectSubject.TabIndex = 2;
@@ -78,7 +78,7 @@
             BtnSearch.BackColor = Color.FromArgb(128, 64, 0);
             BtnSearch.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             BtnSearch.ForeColor = Color.White;
-            BtnSearch.Location = new Point(712, 15);
+            BtnSearch.Location = new Point(705, 15);
             BtnSearch.Name = "BtnSearch";
             BtnSearch.Size = new Size(79, 33);
             BtnSearch.TabIndex = 4;
@@ -90,15 +90,15 @@
             // 
             TxtSearch.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             TxtSearch.ForeColor = Color.Black;
-            TxtSearch.Location = new Point(549, 15);
+            TxtSearch.Location = new Point(542, 15);
             TxtSearch.Name = "TxtSearch";
             TxtSearch.PlaceholderText = "Student";
             TxtSearch.Size = new Size(157, 35);
             TxtSearch.TabIndex = 5;
-           
             // 
             // DgvResultsAnalytics
             // 
+            DgvResultsAnalytics.Anchor = AnchorStyles.Top;
             DgvResultsAnalytics.BackgroundColor = Color.White;
             DgvResultsAnalytics.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             DgvResultsAnalytics.Location = new Point(25, 415);
@@ -108,6 +108,7 @@
             // 
             // ChtGradeDistribution
             // 
+            ChtGradeDistribution.Anchor = AnchorStyles.Top;
             ChtGradeDistribution.Location = new Point(543, 88);
             ChtGradeDistribution.Name = "ChtGradeDistribution";
             ChtGradeDistribution.PanCursor = Cursors.Hand;
@@ -120,6 +121,7 @@
             // 
             // ChtPassFail
             // 
+            ChtPassFail.Anchor = AnchorStyles.Top;
             ChtPassFail.Location = new Point(315, 88);
             ChtPassFail.Name = "ChtPassFail";
             ChtPassFail.PanCursor = Cursors.Hand;
@@ -132,6 +134,7 @@
             // 
             // ChtStudentProgression
             // 
+            ChtStudentProgression.Anchor = AnchorStyles.Top;
             ChtStudentProgression.Location = new Point(1, 88);
             ChtStudentProgression.Name = "ChtStudentProgression";
             ChtStudentProgression.PanCursor = Cursors.Hand;

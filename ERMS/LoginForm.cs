@@ -222,7 +222,7 @@ namespace ERMS
                                 else
                                 {
                                     Sound.PlayError();
-                                    message = $"Invalid credentials. Attempt {loginAttempts} of 3.";
+                                    message = $"Invalid credentials.";
                                 }
 
                                 return false;

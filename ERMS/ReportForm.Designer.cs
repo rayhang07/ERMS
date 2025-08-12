@@ -42,21 +42,23 @@
             // 
             // TxtTeachersComment
             // 
-            TxtTeachersComment.BackColor = SystemColors.Window;
-            TxtTeachersComment.Location = new Point(138, 542);
+            TxtTeachersComment.Anchor = AnchorStyles.Top;
+            TxtTeachersComment.BackColor = SystemColors.ScrollBar;
+            TxtTeachersComment.Location = new Point(75, 458);
             TxtTeachersComment.Multiline = true;
             TxtTeachersComment.Name = "TxtTeachersComment";
             TxtTeachersComment.PlaceholderText = "Teachers Comment:";
             TxtTeachersComment.ScrollBars = ScrollBars.Vertical;
-            TxtTeachersComment.Size = new Size(484, 212);
+            TxtTeachersComment.Size = new Size(668, 284);
             TxtTeachersComment.TabIndex = 0;
             // 
             // BtnShare
             // 
+            BtnShare.Anchor = AnchorStyles.Top;
             BtnShare.BackColor = Color.FromArgb(128, 64, 0);
             BtnShare.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             BtnShare.ForeColor = Color.White;
-            BtnShare.Location = new Point(694, 12);
+            BtnShare.Location = new Point(703, 17);
             BtnShare.Name = "BtnShare";
             BtnShare.Size = new Size(79, 33);
             BtnShare.TabIndex = 5;
@@ -68,20 +70,21 @@
             // 
             TxtSearch.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             TxtSearch.ForeColor = Color.Black;
-            TxtSearch.Location = new Point(233, 31);
+            TxtSearch.Location = new Point(185, 14);
             TxtSearch.Name = "TxtSearch";
             TxtSearch.PlaceholderText = "Student";
             TxtSearch.Size = new Size(157, 35);
             TxtSearch.TabIndex = 6;
+            TxtSearch.TextChanged += TxtSearch_TextChanged;
             // 
             // BtnSearch
             // 
             BtnSearch.BackColor = Color.FromArgb(128, 64, 0);
             BtnSearch.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             BtnSearch.ForeColor = Color.White;
-            BtnSearch.Location = new Point(407, 34);
+            BtnSearch.Location = new Point(362, 17);
             BtnSearch.Name = "BtnSearch";
-            BtnSearch.Size = new Size(79, 33);
+            BtnSearch.Size = new Size(81, 33);
             BtnSearch.TabIndex = 7;
             BtnSearch.Text = "Search";
             BtnSearch.UseVisualStyleBackColor = false;
@@ -89,10 +92,11 @@
             // 
             // LblName
             // 
+            LblName.Anchor = AnchorStyles.Top;
             LblName.AutoSize = true;
             LblName.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             LblName.ForeColor = Color.Black;
-            LblName.Location = new Point(115, 86);
+            LblName.Location = new Point(113, 93);
             LblName.Name = "LblName";
             LblName.Size = new Size(54, 20);
             LblName.TabIndex = 8;
@@ -100,10 +104,11 @@
             // 
             // LblClassName
             // 
+            LblClassName.Anchor = AnchorStyles.Top;
             LblClassName.AutoSize = true;
             LblClassName.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             LblClassName.ForeColor = Color.Black;
-            LblClassName.Location = new Point(363, 86);
+            LblClassName.Location = new Point(361, 93);
             LblClassName.Name = "LblClassName";
             LblClassName.Size = new Size(91, 20);
             LblClassName.TabIndex = 9;
@@ -111,10 +116,11 @@
             // 
             // LblDate
             // 
+            LblDate.Anchor = AnchorStyles.Top;
             LblDate.AutoSize = true;
             LblDate.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             LblDate.ForeColor = Color.Black;
-            LblDate.Location = new Point(629, 86);
+            LblDate.Location = new Point(627, 93);
             LblDate.Name = "LblDate";
             LblDate.Size = new Size(45, 20);
             LblDate.TabIndex = 10;
@@ -124,7 +130,7 @@
             // 
             CmbSelectClass.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             CmbSelectClass.FormattingEnabled = true;
-            CmbSelectClass.Location = new Point(12, 28);
+            CmbSelectClass.Location = new Point(5, 12);
             CmbSelectClass.Name = "CmbSelectClass";
             CmbSelectClass.Size = new Size(147, 38);
             CmbSelectClass.TabIndex = 11;
@@ -132,12 +138,13 @@
             // 
             // DgvReports
             // 
+            DgvReports.Anchor = AnchorStyles.Top;
             DgvReports.BackgroundColor = Color.White;
-            DgvReports.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            DgvReports.Location = new Point(194, 165);
+            DgvReports.ColumnHeadersHeight = 40;
+            DgvReports.Location = new Point(113, 182);
             DgvReports.Name = "DgvReports";
             DgvReports.RowHeadersWidth = 95;
-            DgvReports.Size = new Size(396, 264);
+            DgvReports.Size = new Size(563, 244);
             DgvReports.TabIndex = 12;
             // 
             // ReportForm
@@ -155,7 +162,7 @@
             Controls.Add(BtnShare);
             Controls.Add(TxtTeachersComment);
             Name = "ReportForm";
-            Text = "ReportForm";
+            Text = " ";
             ((System.ComponentModel.ISupportInitialize)DgvReports).EndInit();
             ResumeLayout(false);
             PerformLayout();

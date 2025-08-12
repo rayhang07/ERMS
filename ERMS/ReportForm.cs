@@ -53,10 +53,17 @@ namespace ERMS
             // Set default cell styles
             DgvReports.DefaultCellStyle.BackColor = System.Drawing.Color.White;
             DgvReports.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
-            // Optionally clear rows to make sure empty
+            // clear rows to make sure empty
             DgvReports.Rows.Clear();
 
             LoadClasses();
+
+            DgvReports.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            int colCount = DgvReports.Columns.Count;
+            foreach (DataGridViewColumn col in DgvReports.Columns)
+            {
+                col.FillWeight = 100f / colCount;
+            }
 
         }
         private void LoadClasses()
@@ -78,7 +85,7 @@ namespace ERMS
                     using (var reader = cmd.ExecuteReader())
                     {
                         CmbSelectClass.Items.Clear();
-                        CmbSelectClass.Items.Add(""); 
+                        CmbSelectClass.Items.Add("");
                         while (reader.Read())
                         {
                             CmbSelectClass.Items.Add(reader.GetString(0));
@@ -138,7 +145,7 @@ namespace ERMS
             }
 
             using (var conn = userRegistrationService.GetOpenConnection())
-              {   
+            {
                 if (conn == null)
                 {
                     Sound.PlayError();
@@ -272,8 +279,8 @@ namespace ERMS
                     logo.ScaleToFit(80, 80);
 
                     // Adjusts the margins for the page
-                    float x = pdf.GetDefaultPageSize().GetWidth() - 90; 
-                    float y = pdf.GetDefaultPageSize().GetHeight() - 90; 
+                    float x = pdf.GetDefaultPageSize().GetWidth() - 90;
+                    float y = pdf.GetDefaultPageSize().GetHeight() - 90;
                     logo.SetFixedPosition(x, y);
                     document.Add(logo);
 
@@ -292,6 +299,7 @@ namespace ERMS
                     document.Add(new Paragraph(LblName.Text).SetFont(normalFont).SetFontSize(12).SetFontColor(black));
                     document.Add(new Paragraph(LblClassName.Text).SetFont(normalFont).SetFontSize(12).SetFontColor(black));
                     document.Add(new Paragraph(LblDate.Text).SetFont(normalFont).SetFontSize(12).SetFontColor(black));
+                    document.Add(new Paragraph(""));
 
 
                     // Results table with border and background on headers
@@ -337,8 +345,20 @@ namespace ERMS
                     // Provides success feedback to the user
                     Sound.PlaySuccess();
                     MessageBox.Show("Report exported successfully!");
+                    TxtSearch.Clear();
+                    TxtTeachersComment.Clear();
+                    LblClassName.Text = $"Class Name: ";
+                    LblName.Text = $"Student Name";
+                    LblDate.Text = "Date: ";
+                    CmbSelectClass.SelectedIndex = 0;
+                    DgvReports.Rows.Clear();
                 }
             }
+        }
+
+        private void TxtSearch_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

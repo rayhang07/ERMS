@@ -40,7 +40,7 @@
             // 
             CmbSelectClass.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             CmbSelectClass.FormattingEnabled = true;
-            CmbSelectClass.Location = new Point(12, 28);
+            CmbSelectClass.Location = new Point(5, 12);
             CmbSelectClass.Name = "CmbSelectClass";
             CmbSelectClass.Size = new Size(147, 38);
             CmbSelectClass.TabIndex = 0;
@@ -51,7 +51,7 @@
             // 
             CmbSelectSubject.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             CmbSelectSubject.FormattingEnabled = true;
-            CmbSelectSubject.Location = new Point(174, 28);
+            CmbSelectSubject.Location = new Point(167, 12);
             CmbSelectSubject.Name = "CmbSelectSubject";
             CmbSelectSubject.Size = new Size(163, 38);
             CmbSelectSubject.TabIndex = 1;
@@ -62,7 +62,7 @@
             // 
             TxtSearch.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             TxtSearch.ForeColor = Color.Black;
-            TxtSearch.Location = new Point(408, 31);
+            TxtSearch.Location = new Point(363, 12);
             TxtSearch.Name = "TxtSearch";
             TxtSearch.PlaceholderText = "Student";
             TxtSearch.Size = new Size(157, 35);
@@ -73,7 +73,7 @@
             BtnSearch.BackColor = Color.FromArgb(128, 64, 0);
             BtnSearch.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             BtnSearch.ForeColor = Color.White;
-            BtnSearch.Location = new Point(571, 33);
+            BtnSearch.Location = new Point(526, 12);
             BtnSearch.Name = "BtnSearch";
             BtnSearch.Size = new Size(79, 33);
             BtnSearch.TabIndex = 3;
@@ -83,13 +83,15 @@
             // 
             // DgvMyClasses
             // 
+            DgvMyClasses.Anchor = AnchorStyles.None;
+            DgvMyClasses.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.ColumnHeader;
             DgvMyClasses.BackgroundColor = Color.White;
             DgvMyClasses.ColumnHeadersHeight = 34;
             DgvMyClasses.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            DgvMyClasses.Location = new Point(71, 201);
+            DgvMyClasses.Location = new Point(12, 211);
             DgvMyClasses.Name = "DgvMyClasses";
-            DgvMyClasses.RowHeadersWidth = 140;
-            DgvMyClasses.Size = new Size(641, 337);
+            DgvMyClasses.RowHeadersWidth = 200;
+            DgvMyClasses.Size = new Size(770, 459);
             DgvMyClasses.TabIndex = 4;
             // 
             // MyClassesForm
