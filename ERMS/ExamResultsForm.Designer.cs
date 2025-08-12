@@ -464,7 +464,7 @@
             LblStudentIDRemovedLast.AutoSize = true;
             LblStudentIDRemovedLast.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold);
             LblStudentIDRemovedLast.ForeColor = Color.Black;
-            LblStudentIDRemovedLast.Location = new Point(496, 636);
+            LblStudentIDRemovedLast.Location = new Point(496, 628);
             LblStudentIDRemovedLast.Name = "LblStudentIDRemovedLast";
             LblStudentIDRemovedLast.Size = new Size(108, 25);
             LblStudentIDRemovedLast.TabIndex = 71;
@@ -477,7 +477,7 @@
             LblStudentNameRemovedLast.AutoSize = true;
             LblStudentNameRemovedLast.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold);
             LblStudentNameRemovedLast.ForeColor = Color.Black;
-            LblStudentNameRemovedLast.Location = new Point(496, 611);
+            LblStudentNameRemovedLast.Location = new Point(496, 603);
             LblStudentNameRemovedLast.Name = "LblStudentNameRemovedLast";
             LblStudentNameRemovedLast.Size = new Size(140, 25);
             LblStudentNameRemovedLast.TabIndex = 70;
@@ -490,7 +490,7 @@
             LblAssessmentNameRemovedLast.AutoSize = true;
             LblAssessmentNameRemovedLast.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold);
             LblAssessmentNameRemovedLast.ForeColor = Color.Black;
-            LblAssessmentNameRemovedLast.Location = new Point(496, 686);
+            LblAssessmentNameRemovedLast.Location = new Point(496, 678);
             LblAssessmentNameRemovedLast.Name = "LblAssessmentNameRemovedLast";
             LblAssessmentNameRemovedLast.Size = new Size(170, 25);
             LblAssessmentNameRemovedLast.TabIndex = 69;
@@ -503,7 +503,7 @@
             LblAssessmentNameAddLast.AutoSize = true;
             LblAssessmentNameAddLast.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold);
             LblAssessmentNameAddLast.ForeColor = Color.Black;
-            LblAssessmentNameAddLast.Location = new Point(284, 686);
+            LblAssessmentNameAddLast.Location = new Point(284, 678);
             LblAssessmentNameAddLast.Name = "LblAssessmentNameAddLast";
             LblAssessmentNameAddLast.Size = new Size(170, 25);
             LblAssessmentNameAddLast.TabIndex = 68;
@@ -516,7 +516,7 @@
             LblStudentIDAddLast.AutoSize = true;
             LblStudentIDAddLast.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold);
             LblStudentIDAddLast.ForeColor = Color.Black;
-            LblStudentIDAddLast.Location = new Point(284, 636);
+            LblStudentIDAddLast.Location = new Point(284, 628);
             LblStudentIDAddLast.Name = "LblStudentIDAddLast";
             LblStudentIDAddLast.Size = new Size(108, 25);
             LblStudentIDAddLast.TabIndex = 67;
@@ -529,7 +529,7 @@
             LblStudentNameAddLast.AutoSize = true;
             LblStudentNameAddLast.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold);
             LblStudentNameAddLast.ForeColor = Color.Black;
-            LblStudentNameAddLast.Location = new Point(284, 611);
+            LblStudentNameAddLast.Location = new Point(284, 603);
             LblStudentNameAddLast.Name = "LblStudentNameAddLast";
             LblStudentNameAddLast.Size = new Size(140, 25);
             LblStudentNameAddLast.TabIndex = 66;
@@ -542,7 +542,7 @@
             LblYearLast.AutoSize = true;
             LblYearLast.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold);
             LblYearLast.ForeColor = Color.Black;
-            LblYearLast.Location = new Point(28, 660);
+            LblYearLast.Location = new Point(28, 652);
             LblYearLast.Name = "LblYearLast";
             LblYearLast.Size = new Size(50, 25);
             LblYearLast.TabIndex = 65;
@@ -555,7 +555,7 @@
             LblSubjectLast.AutoSize = true;
             LblSubjectLast.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold);
             LblSubjectLast.ForeColor = Color.Black;
-            LblSubjectLast.Location = new Point(28, 636);
+            LblSubjectLast.Location = new Point(28, 628);
             LblSubjectLast.Name = "LblSubjectLast";
             LblSubjectLast.Size = new Size(78, 25);
             LblSubjectLast.TabIndex = 64;
@@ -568,7 +568,7 @@
             LblClassNameLast.AutoSize = true;
             LblClassNameLast.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold);
             LblClassNameLast.ForeColor = Color.Black;
-            LblClassNameLast.Location = new Point(28, 611);
+            LblClassNameLast.Location = new Point(28, 603);
             LblClassNameLast.Name = "LblClassNameLast";
             LblClassNameLast.Size = new Size(112, 25);
             LblClassNameLast.TabIndex = 63;
@@ -581,7 +581,7 @@
             LblLastResultRemoved.AutoSize = true;
             LblLastResultRemoved.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             LblLastResultRemoved.ForeColor = Color.Black;
-            LblLastResultRemoved.Location = new Point(496, 568);
+            LblLastResultRemoved.Location = new Point(496, 560);
             LblLastResultRemoved.Name = "LblLastResultRemoved";
             LblLastResultRemoved.Size = new Size(215, 30);
             LblLastResultRemoved.TabIndex = 62;
@@ -594,7 +594,7 @@
             LblLastResultAdded.AutoSize = true;
             LblLastResultAdded.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             LblLastResultAdded.ForeColor = Color.Black;
-            LblLastResultAdded.Location = new Point(284, 568);
+            LblLastResultAdded.Location = new Point(284, 560);
             LblLastResultAdded.Name = "LblLastResultAdded";
             LblLastResultAdded.Size = new Size(189, 30);
             LblLastResultAdded.TabIndex = 61;
@@ -607,7 +607,7 @@
             LblLastAssessmentCreated.AutoSize = true;
             LblLastAssessmentCreated.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             LblLastAssessmentCreated.ForeColor = Color.Black;
-            LblLastAssessmentCreated.Location = new Point(28, 568);
+            LblLastAssessmentCreated.Location = new Point(28, 560);
             LblLastAssessmentCreated.Name = "LblLastAssessmentCreated";
             LblLastAssessmentCreated.Size = new Size(252, 30);
             LblLastAssessmentCreated.TabIndex = 60;
@@ -620,7 +620,7 @@
             LblAssessmentNameLast.AutoSize = true;
             LblAssessmentNameLast.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold);
             LblAssessmentNameLast.ForeColor = Color.Black;
-            LblAssessmentNameLast.Location = new Point(28, 686);
+            LblAssessmentNameLast.Location = new Point(28, 678);
             LblAssessmentNameLast.Name = "LblAssessmentNameLast";
             LblAssessmentNameLast.Size = new Size(170, 25);
             LblAssessmentNameLast.TabIndex = 72;
@@ -633,7 +633,7 @@
             LblScoreAddLast.AutoSize = true;
             LblScoreAddLast.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold);
             LblScoreAddLast.ForeColor = Color.Black;
-            LblScoreAddLast.Location = new Point(284, 711);
+            LblScoreAddLast.Location = new Point(284, 703);
             LblScoreAddLast.Name = "LblScoreAddLast";
             LblScoreAddLast.Size = new Size(62, 25);
             LblScoreAddLast.TabIndex = 73;
@@ -646,7 +646,7 @@
             LblGradeAddLast.AutoSize = true;
             LblGradeAddLast.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold);
             LblGradeAddLast.ForeColor = Color.Black;
-            LblGradeAddLast.Location = new Point(284, 736);
+            LblGradeAddLast.Location = new Point(284, 728);
             LblGradeAddLast.Name = "LblGradeAddLast";
             LblGradeAddLast.Size = new Size(66, 25);
             LblGradeAddLast.TabIndex = 74;
@@ -659,7 +659,7 @@
             LblScoreRemovedLast.AutoSize = true;
             LblScoreRemovedLast.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold);
             LblScoreRemovedLast.ForeColor = Color.Black;
-            LblScoreRemovedLast.Location = new Point(496, 711);
+            LblScoreRemovedLast.Location = new Point(496, 703);
             LblScoreRemovedLast.Name = "LblScoreRemovedLast";
             LblScoreRemovedLast.Size = new Size(62, 25);
             LblScoreRemovedLast.TabIndex = 75;
@@ -672,7 +672,7 @@
             LblGradeRemovedLast.AutoSize = true;
             LblGradeRemovedLast.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold);
             LblGradeRemovedLast.ForeColor = Color.Black;
-            LblGradeRemovedLast.Location = new Point(496, 736);
+            LblGradeRemovedLast.Location = new Point(496, 728);
             LblGradeRemovedLast.Name = "LblGradeRemovedLast";
             LblGradeRemovedLast.Size = new Size(66, 25);
             LblGradeRemovedLast.TabIndex = 76;
@@ -685,7 +685,7 @@
             LblDateLast.AutoSize = true;
             LblDateLast.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold);
             LblDateLast.ForeColor = Color.Black;
-            LblDateLast.Location = new Point(28, 711);
+            LblDateLast.Location = new Point(28, 703);
             LblDateLast.Name = "LblDateLast";
             LblDateLast.Size = new Size(53, 25);
             LblDateLast.TabIndex = 77;
@@ -736,7 +736,7 @@
             LblClassNameAddLast.AutoSize = true;
             LblClassNameAddLast.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold);
             LblClassNameAddLast.ForeColor = Color.Black;
-            LblClassNameAddLast.Location = new Point(284, 661);
+            LblClassNameAddLast.Location = new Point(284, 653);
             LblClassNameAddLast.Name = "LblClassNameAddLast";
             LblClassNameAddLast.Size = new Size(112, 25);
             LblClassNameAddLast.TabIndex = 82;
@@ -749,7 +749,7 @@
             LblClassNameRemovedLast.AutoSize = true;
             LblClassNameRemovedLast.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold);
             LblClassNameRemovedLast.ForeColor = Color.Black;
-            LblClassNameRemovedLast.Location = new Point(496, 661);
+            LblClassNameRemovedLast.Location = new Point(496, 653);
             LblClassNameRemovedLast.Name = "LblClassNameRemovedLast";
             LblClassNameRemovedLast.Size = new Size(112, 25);
             LblClassNameRemovedLast.TabIndex = 83;

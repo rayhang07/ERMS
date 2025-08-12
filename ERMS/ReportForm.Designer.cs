@@ -35,12 +35,15 @@
             LblName = new Label();
             LblClassName = new Label();
             LblDate = new Label();
+            CmbSelectClass = new ComboBox();
+            DgvReports = new DataGridView();
+            ((System.ComponentModel.ISupportInitialize)DgvReports).BeginInit();
             SuspendLayout();
             // 
             // TxtTeachersComment
             // 
-            TxtTeachersComment.Anchor = AnchorStyles.Bottom;
-            TxtTeachersComment.Location = new Point(148, 483);
+            TxtTeachersComment.BackColor = SystemColors.Window;
+            TxtTeachersComment.Location = new Point(138, 542);
             TxtTeachersComment.Multiline = true;
             TxtTeachersComment.Name = "TxtTeachersComment";
             TxtTeachersComment.PlaceholderText = "Teachers Comment:";
@@ -53,18 +56,19 @@
             BtnShare.BackColor = Color.FromArgb(128, 64, 0);
             BtnShare.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             BtnShare.ForeColor = Color.White;
-            BtnShare.Location = new Point(625, 12);
+            BtnShare.Location = new Point(694, 12);
             BtnShare.Name = "BtnShare";
             BtnShare.Size = new Size(79, 33);
             BtnShare.TabIndex = 5;
             BtnShare.Text = "Share";
             BtnShare.UseVisualStyleBackColor = false;
+            BtnShare.Click += BtnShare_Click;
             // 
             // TxtSearch
             // 
             TxtSearch.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             TxtSearch.ForeColor = Color.Black;
-            TxtSearch.Location = new Point(12, 12);
+            TxtSearch.Location = new Point(233, 31);
             TxtSearch.Name = "TxtSearch";
             TxtSearch.PlaceholderText = "Student";
             TxtSearch.Size = new Size(157, 35);
@@ -75,12 +79,13 @@
             BtnSearch.BackColor = Color.FromArgb(128, 64, 0);
             BtnSearch.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             BtnSearch.ForeColor = Color.White;
-            BtnSearch.Location = new Point(175, 15);
+            BtnSearch.Location = new Point(407, 34);
             BtnSearch.Name = "BtnSearch";
             BtnSearch.Size = new Size(79, 33);
             BtnSearch.TabIndex = 7;
             BtnSearch.Text = "Search";
             BtnSearch.UseVisualStyleBackColor = false;
+            BtnSearch.Click += BtnSearch_Click;
             // 
             // LblName
             // 
@@ -98,7 +103,7 @@
             LblClassName.AutoSize = true;
             LblClassName.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             LblClassName.ForeColor = Color.Black;
-            LblClassName.Location = new Point(328, 86);
+            LblClassName.Location = new Point(363, 86);
             LblClassName.Name = "LblClassName";
             LblClassName.Size = new Size(91, 20);
             LblClassName.TabIndex = 9;
@@ -109,17 +114,39 @@
             LblDate.AutoSize = true;
             LblDate.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             LblDate.ForeColor = Color.Black;
-            LblDate.Location = new Point(550, 86);
+            LblDate.Location = new Point(629, 86);
             LblDate.Name = "LblDate";
             LblDate.Size = new Size(45, 20);
             LblDate.TabIndex = 10;
             LblDate.Text = "Date:";
+            // 
+            // CmbSelectClass
+            // 
+            CmbSelectClass.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            CmbSelectClass.FormattingEnabled = true;
+            CmbSelectClass.Location = new Point(12, 28);
+            CmbSelectClass.Name = "CmbSelectClass";
+            CmbSelectClass.Size = new Size(147, 38);
+            CmbSelectClass.TabIndex = 11;
+            CmbSelectClass.Text = "Select Class";
+            // 
+            // DgvReports
+            // 
+            DgvReports.BackgroundColor = Color.White;
+            DgvReports.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            DgvReports.Location = new Point(194, 165);
+            DgvReports.Name = "DgvReports";
+            DgvReports.RowHeadersWidth = 95;
+            DgvReports.Size = new Size(396, 264);
+            DgvReports.TabIndex = 12;
             // 
             // ReportForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(794, 766);
+            Controls.Add(DgvReports);
+            Controls.Add(CmbSelectClass);
             Controls.Add(LblDate);
             Controls.Add(LblClassName);
             Controls.Add(LblName);
@@ -129,6 +156,7 @@
             Controls.Add(TxtTeachersComment);
             Name = "ReportForm";
             Text = "ReportForm";
+            ((System.ComponentModel.ISupportInitialize)DgvReports).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -142,5 +170,7 @@
         private Label LblName;
         private Label LblClassName;
         private Label LblDate;
+        private ComboBox CmbSelectClass;
+        private DataGridView DgvReports;
     }
 }

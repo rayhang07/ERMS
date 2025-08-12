@@ -11,6 +11,7 @@
   <ItemGroup>
     <PackageReference Include="HIC.System.Windows.Forms.DataVisualization" Version="1.0.1" />
     <PackageReference Include="itext" Version="9.2.0" />
+    <PackageReference Include="itext.bouncy-castle-adapter" Version="9.2.0" />
     <PackageReference Include="itext.commons" Version="9.2.0" />
     <PackageReference Include="NAudio" Version="2.2.1" />
     <PackageReference Include="OxyPlot.WindowsForms" Version="2.2.0" />
