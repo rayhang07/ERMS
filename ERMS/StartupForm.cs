@@ -54,6 +54,17 @@ namespace ERMS
 
         }
 
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == (Keys.Control | Keys.Q))
+            {
+                Application.Exit();
+                return true;
+
+
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
         private async void StartupForm_Load(object sender, EventArgs e)
         {
             // Stores 3 messages in a list for the dynamic welcome message

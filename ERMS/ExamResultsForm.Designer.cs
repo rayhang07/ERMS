@@ -98,7 +98,7 @@
             BtnSaveRemove.Location = new Point(648, 377);
             BtnSaveRemove.Name = "BtnSaveRemove";
             BtnSaveRemove.Size = new Size(85, 35);
-            BtnSaveRemove.TabIndex = 47;
+            BtnSaveRemove.TabIndex = 49;
             BtnSaveRemove.Text = "Save";
             BtnSaveRemove.UseVisualStyleBackColor = false;
             BtnSaveRemove.Click += BtnSaveRemove_Click;
@@ -110,7 +110,7 @@
             TxtStudentIDRemove.Location = new Point(118, 381);
             TxtStudentIDRemove.Name = "TxtStudentIDRemove";
             TxtStudentIDRemove.Size = new Size(100, 27);
-            TxtStudentIDRemove.TabIndex = 46;
+            TxtStudentIDRemove.TabIndex = 44;
             // 
             // LblStudentIDRemove
             // 
@@ -130,7 +130,7 @@
             TxtStudentNameRemove.Location = new Point(12, 381);
             TxtStudentNameRemove.Name = "TxtStudentNameRemove";
             TxtStudentNameRemove.Size = new Size(100, 27);
-            TxtStudentNameRemove.TabIndex = 44;
+            TxtStudentNameRemove.TabIndex = 43;
             // 
             // LblStudentNameRemove
             // 
@@ -150,7 +150,7 @@
             TxtScoreRemove.Location = new Point(436, 381);
             TxtScoreRemove.Name = "TxtScoreRemove";
             TxtScoreRemove.Size = new Size(100, 27);
-            TxtScoreRemove.TabIndex = 42;
+            TxtScoreRemove.TabIndex = 47;
             // 
             // LblScoreRemove
             // 
@@ -171,7 +171,7 @@
             BtnSaveAdd.Location = new Point(648, 233);
             BtnSaveAdd.Name = "BtnSaveAdd";
             BtnSaveAdd.Size = new Size(85, 35);
-            BtnSaveAdd.TabIndex = 40;
+            BtnSaveAdd.TabIndex = 42;
             BtnSaveAdd.Text = "Save";
             BtnSaveAdd.UseVisualStyleBackColor = false;
             BtnSaveAdd.Click += BtnSaveAdd_Click;
@@ -203,7 +203,7 @@
             TxtStudentNameAdd.Location = new Point(12, 237);
             TxtStudentNameAdd.Name = "TxtStudentNameAdd";
             TxtStudentNameAdd.Size = new Size(100, 27);
-            TxtStudentNameAdd.TabIndex = 37;
+            TxtStudentNameAdd.TabIndex = 36;
             // 
             // LblStudentNameAdd
             // 
@@ -223,7 +223,7 @@
             TxtStudentIDAdd.Location = new Point(118, 237);
             TxtStudentIDAdd.Name = "TxtStudentIDAdd";
             TxtStudentIDAdd.Size = new Size(100, 27);
-            TxtStudentIDAdd.TabIndex = 35;
+            TxtStudentIDAdd.TabIndex = 37;
             // 
             // LblAssessmentNameAdd
             // 
@@ -244,7 +244,7 @@
             BtnSaveCreate.Location = new Point(542, 91);
             BtnSaveCreate.Name = "BtnSaveCreate";
             BtnSaveCreate.Size = new Size(85, 35);
-            BtnSaveCreate.TabIndex = 33;
+            BtnSaveCreate.TabIndex = 35;
             BtnSaveCreate.Text = "Save";
             BtnSaveCreate.UseVisualStyleBackColor = false;
             BtnSaveCreate.Click += BtnSaveCreate_Click;
@@ -346,7 +346,7 @@
             TxtAssessmentNameCreate.Location = new Point(330, 95);
             TxtAssessmentNameCreate.Name = "TxtAssessmentNameCreate";
             TxtAssessmentNameCreate.Size = new Size(100, 27);
-            TxtAssessmentNameCreate.TabIndex = 48;
+            TxtAssessmentNameCreate.TabIndex = 33;
             // 
             // TxtDateCreate
             // 
@@ -354,7 +354,7 @@
             TxtDateCreate.Location = new Point(436, 95);
             TxtDateCreate.Name = "TxtDateCreate";
             TxtDateCreate.Size = new Size(100, 27);
-            TxtDateCreate.TabIndex = 49;
+            TxtDateCreate.TabIndex = 34;
             // 
             // TxtScoreAdd
             // 
@@ -363,7 +363,7 @@
             TxtScoreAdd.Location = new Point(436, 237);
             TxtScoreAdd.Name = "TxtScoreAdd";
             TxtScoreAdd.Size = new Size(100, 27);
-            TxtScoreAdd.TabIndex = 50;
+            TxtScoreAdd.TabIndex = 40;
             // 
             // TxtGradeAdd
             // 
@@ -372,7 +372,7 @@
             TxtGradeAdd.Location = new Point(542, 237);
             TxtGradeAdd.Name = "TxtGradeAdd";
             TxtGradeAdd.Size = new Size(100, 27);
-            TxtGradeAdd.TabIndex = 51;
+            TxtGradeAdd.TabIndex = 41;
             // 
             // TxtAssessmentNameRemove
             // 
@@ -381,7 +381,7 @@
             TxtAssessmentNameRemove.Location = new Point(330, 381);
             TxtAssessmentNameRemove.Name = "TxtAssessmentNameRemove";
             TxtAssessmentNameRemove.Size = new Size(100, 27);
-            TxtAssessmentNameRemove.TabIndex = 52;
+            TxtAssessmentNameRemove.TabIndex = 46;
             // 
             // TxtGradeRemove
             // 
@@ -390,7 +390,7 @@
             TxtGradeRemove.Location = new Point(542, 381);
             TxtGradeRemove.Name = "TxtGradeRemove";
             TxtGradeRemove.Size = new Size(100, 27);
-            TxtGradeRemove.TabIndex = 53;
+            TxtGradeRemove.TabIndex = 48;
             // 
             // LblAssessmentNameCreate
             // 
@@ -698,7 +698,7 @@
             TxtClassNameAdd.Location = new Point(224, 237);
             TxtClassNameAdd.Name = "TxtClassNameAdd";
             TxtClassNameAdd.Size = new Size(100, 27);
-            TxtClassNameAdd.TabIndex = 78;
+            TxtClassNameAdd.TabIndex = 38;
             // 
             // ClassNameAdd
             // 
@@ -717,7 +717,7 @@
             TxtClassNameRemove.Location = new Point(224, 381);
             TxtClassNameRemove.Name = "TxtClassNameRemove";
             TxtClassNameRemove.Size = new Size(100, 27);
-            TxtClassNameRemove.TabIndex = 80;
+            TxtClassNameRemove.TabIndex = 45;
             // 
             // LblClassNameRemove
             // 

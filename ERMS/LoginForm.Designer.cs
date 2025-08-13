@@ -64,7 +64,7 @@
             BtnLogin.Location = new Point(579, 673);
             BtnLogin.Name = "BtnLogin";
             BtnLogin.Size = new Size(162, 60);
-            BtnLogin.TabIndex = 1;
+            BtnLogin.TabIndex = 3;
             BtnLogin.Text = "Login";
             BtnLogin.UseVisualStyleBackColor = false;
             BtnLogin.Click += BtnLogin_Click;
@@ -77,7 +77,7 @@
             BtnRegisterForm.Location = new Point(666, 828);
             BtnRegisterForm.Name = "BtnRegisterForm";
             BtnRegisterForm.Size = new Size(162, 60);
-            BtnRegisterForm.TabIndex = 2;
+            BtnRegisterForm.TabIndex = 5;
             BtnRegisterForm.Text = "Register";
             BtnRegisterForm.UseVisualStyleBackColor = false;
             BtnRegisterForm.Click += BtnRegisterForm_Click;
@@ -89,7 +89,7 @@
             CbShowPassword.Location = new Point(435, 622);
             CbShowPassword.Name = "CbShowPassword";
             CbShowPassword.Size = new Size(187, 28);
-            CbShowPassword.TabIndex = 3;
+            CbShowPassword.TabIndex = 2;
             CbShowPassword.Text = "Show Password";
             CbShowPassword.UseVisualStyleBackColor = true;
             CbShowPassword.CheckedChanged += CbShowPassword_CheckedChanged;
@@ -115,7 +115,7 @@
             TxtPassword.Name = "TxtPassword";
             TxtPassword.PlaceholderText = "Password";
             TxtPassword.Size = new Size(462, 39);
-            TxtPassword.TabIndex = 5;
+            TxtPassword.TabIndex = 1;
             TxtPassword.UseSystemPasswordChar = true;
             // 
             // PbUserIcon

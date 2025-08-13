@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.OleDb;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Linq;
 using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Collections.Specialized.BitVector32;
 
 
 namespace ERMS
@@ -53,18 +56,181 @@ namespace ERMS
         }
 
 
-        
+
         private void DashboardForm_Load(object sender, EventArgs e)
         {
+            // Presents a welcome back message with the users full name
             LblWelcomeBackMessage.Text = $"Welcome back {CurrentUser.FullName}";
+
+            // Center the LblWelcomeBackMessage label horizontally 
             LblWelcomeBackMessage.Left = (this.ClientSize.Width - LblWelcomeBackMessage.Width) / 2;
+
             // Display the current date in the LblDateTime label as a long date string
             LblDateTime.Text = DateTime.Now.ToString("D");
 
             // Center the LblDateTime label horizontally within the form's client area
             LblDateTime.Left = (this.ClientSize.Width - LblDateTime.Width) / 2;
+
+            PbLogo.Left = (this.ClientSize.Width - PbLogo.Width) / 2;
+
+            LoadDashboardSummary();
         }
-        
+        private void LoadDashboardSummary()
+        {
+            LoadUpcomingAssessments();
+            LoadTopClasses();
+            LoadTopStudents();
+        }
+
+        private void LoadTopClasses()
+        {
+            int currentUserId = CurrentUser.UserId;
+
+            // Get all class names for this user
+            List<string> myClasses = GetMyClasses(currentUserId);
+
+            // Get all rankings
+            DataTable classRankings = RankingService.GetClassRankings();
+
+            // Filter rankings to only classes that belong to the current user
+            var filteredRows = classRankings.AsEnumerable()
+                .Where(row => myClasses.Contains(row["Class"].ToString()))
+                .ToList();
+
+            // Append the class names to the labels
+            if (filteredRows.Count > 0)
+                LblTopClass1.Text = filteredRows[0]["Class"].ToString();
+
+            if (filteredRows.Count > 1)
+                LblTopClass2.Text = filteredRows[1]["Class"].ToString();
+        }
+
+        private void LoadTopStudents()
+        {
+            int currentUserId = CurrentUser.UserId;
+
+            // Get all student names for this user
+            List<string> myStudents = GetMyStudents(currentUserId);
+
+            // Get all student rankings
+            DataTable studentRankings = RankingService.GetStudentRankings();
+
+            // Filter rankings to only students that belong to the current user
+            var filteredRows = studentRankings.AsEnumerable()
+                .Where(row => myStudents.Contains(row["Student"].ToString()))
+                .ToList();
+
+            // Append the student names to the labels
+            if (filteredRows.Count > 0)
+                LblTopPerformer1.Text = filteredRows[0]["Student"].ToString();
+
+            if (filteredRows.Count > 1)
+                LblTopPerformer2.Text = filteredRows[1]["Student"].ToString();
+        }
+
+        private void LoadUpcomingAssessments()
+        {
+            // Gets current users ID 
+            int currentUserId = CurrentUser.UserId;
+
+            // Create an instance of ExamResultsManagementService to access exam data
+            var erms = new ExamResultsManagementService();
+
+            // Get the top upcoming assessments for the current user
+            var examDates = erms.GetTopUpcomingAssessments(currentUserId);
+
+            DataTable studentRankings = RankingService.GetStudentRankings();
+
+            // Appends the exam date and the assessment name to the labels
+            if (examDates.Count > 0)
+                LblExamDate1.Text = $"{examDates[0].AssessmentName} - {DateTime.Parse(examDates[0].AssessmentDate):dd/MM/yyyy}";
+            if (examDates.Count > 1)
+                LblExamDate2.Text = $"{examDates[1].AssessmentName} - {DateTime.Parse(examDates[1].AssessmentDate):dd/MM/yyyy}";
+        }
+
+        private List<string> GetMyClasses(int currentUserId)
+        {
+            // Gets the path to the database file
+            string dbPath = Path.Combine(Application.StartupPath, "Database", "ERMS.accdb");
+
+            // Creates an instance of UserRegistrationService to access user data
+            var userRegistrationService = new UserRegistrationService(dbPath);
+
+            // Initialises a list to hold class names
+            var classes = new List<string>();
+            using (var conn = userRegistrationService.GetOpenConnection())
+            {
+                if (conn == null)
+                {
+                    Sound.PlayError();
+                    MessageBox.Show("Failed to connect to the database.");
+                    return null;
+                }
+
+
+                // SQL query to get class names for the current user
+                string query = "SELECT ClassName FROM Class WHERE UserID = ?";
+                using (var cmd = new OleDbCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("?", currentUserId);
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                            classes.Add(reader["ClassName"].ToString());
+                    }
+                }
+            }
+            return classes;
+        }
+
+        private List<string> GetMyStudents(int currentUserId)
+        {
+            // Gets the path to the database file
+            string dbPath = Path.Combine(Application.StartupPath, "Database", "ERMS.accdb");
+
+            // Creates an instance of UserRegistrationService to access user data
+            var userRegistrationService = new UserRegistrationService(dbPath);
+
+            // Initialises a list to hold student names
+            var students = new List<string>();
+            using (var conn = userRegistrationService.GetOpenConnection())
+            {
+                if (conn == null)
+                {
+                    Sound.PlayError();
+                    MessageBox.Show("Failed to connect to the database.");
+                    return null;
+                }
+
+
+                // SQL query to get student names for the current user
+                string query = @"
+            SELECT DISTINCT Students.StudentName
+            FROM (Students
+            INNER JOIN StudentClasses 
+                ON Students.StudentID = StudentClasses.StudentID)
+            INNER JOIN Class 
+                ON StudentClasses.ClassID = Class.ClassID
+            WHERE Class.UserID = ?";
+
+
+                using (var cmd = new OleDbCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue(" ? ", currentUserId);
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                            students.Add(reader["StudentName"].ToString());
+                    }
+                }
+            }
+            return students;
+        }
+
+        private void PbLogo_Click(object sender, EventArgs e)
+        {
+
+        }
     }
     // Static helper class  for drawing lines around a list of labels so can be inherited
     public static class LineDrawer
@@ -128,6 +294,9 @@ namespace ERMS
                 e.Graphics.DrawLine(pen, startX, yBelow, endX, yBelow);
             }
         }
+
+        
+
     }
 
 }

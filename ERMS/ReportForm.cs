@@ -49,6 +49,9 @@ namespace ERMS
 
             // Set header text color
             DgvReports.ColumnHeadersDefaultCellStyle.ForeColor = System.Drawing.Color.White;
+            
+            DgvReports.ColumnHeadersDefaultCellStyle.Font =
+            new Font(DgvReports.ColumnHeadersDefaultCellStyle.Font, FontStyle.Bold);
 
             // Set default cell styles
             DgvReports.DefaultCellStyle.BackColor = System.Drawing.Color.White;
@@ -64,7 +67,7 @@ namespace ERMS
             {
                 col.FillWeight = 100f / colCount;
             }
-
+            
         }
         private void LoadClasses()
         {
@@ -85,7 +88,7 @@ namespace ERMS
                     using (var reader = cmd.ExecuteReader())
                     {
                         CmbSelectClass.Items.Clear();
-                        CmbSelectClass.Items.Add("");
+                        CmbSelectClass.Items.Add("Select Class");
                         while (reader.Read())
                         {
                             CmbSelectClass.Items.Add(reader.GetString(0));
@@ -225,8 +228,8 @@ namespace ERMS
             }
 
             // Appends the labels with the searched student's information and todays date
-            LblClassName.Text = $"Class Name: {className}";
-            LblName.Text = $"Student Name: {studentName}";
+            LblClassName.Text = $"Class: {className}";
+            LblName.Text = $"Name: {studentName}";
             LblDate.Text = "Date: " + DateTime.Now.ToString("dd/MM/yyyy");
         }
 
@@ -347,8 +350,8 @@ namespace ERMS
                     MessageBox.Show("Report exported successfully!");
                     TxtSearch.Clear();
                     TxtTeachersComment.Clear();
-                    LblClassName.Text = $"Class Name: ";
-                    LblName.Text = $"Student Name";
+                    LblClassName.Text = $"Class: ";
+                    LblName.Text = $"Name: ";
                     LblDate.Text = "Date: ";
                     CmbSelectClass.SelectedIndex = 0;
                     DgvReports.Rows.Clear();

@@ -349,6 +349,7 @@
             Controls.Add(PnlContainer);
             Controls.Add(PnlSideMenu);
             ForeColor = Color.White;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MinimumSize = new Size(1133, 844);
             Name = "MainApplicationForm";
             Text = "MainApplicationForm";

@@ -111,7 +111,7 @@
             TxtConfirmPassword.Name = "TxtConfirmPassword";
             TxtConfirmPassword.PlaceholderText = "Confirm Password";
             TxtConfirmPassword.Size = new Size(462, 39);
-            TxtConfirmPassword.TabIndex = 14;
+            TxtConfirmPassword.TabIndex = 4;
             TxtConfirmPassword.UseSystemPasswordChar = true;
             // 
             // pictureBox2
@@ -145,7 +145,7 @@
             TxtName.Name = "TxtName";
             TxtName.PlaceholderText = "Name";
             TxtName.Size = new Size(462, 39);
-            TxtName.TabIndex = 11;
+            TxtName.TabIndex = 0;
             // 
             // TxtEmail
             // 
@@ -156,7 +156,7 @@
             TxtEmail.Name = "TxtEmail";
             TxtEmail.PlaceholderText = "Email";
             TxtEmail.Size = new Size(462, 39);
-            TxtEmail.TabIndex = 10;
+            TxtEmail.TabIndex = 2;
             // 
             // PbPasswordIcon
             // 
@@ -189,7 +189,7 @@
             TxtPassword.Name = "TxtPassword";
             TxtPassword.PlaceholderText = "Password";
             TxtPassword.Size = new Size(462, 39);
-            TxtPassword.TabIndex = 5;
+            TxtPassword.TabIndex = 3;
             TxtPassword.UseSystemPasswordChar = true;
             TxtPassword.TextChanged += TxtPassword_TextChanged;
             // 
@@ -201,7 +201,7 @@
             BtnLoginForm.Location = new Point(498, 828);
             BtnLoginForm.Name = "BtnLoginForm";
             BtnLoginForm.Size = new Size(162, 60);
-            BtnLoginForm.TabIndex = 4;
+            BtnLoginForm.TabIndex = 7;
             BtnLoginForm.Text = "Login";
             BtnLoginForm.UseVisualStyleBackColor = false;
             BtnLoginForm.Click += BtnLoginForm_Click;
@@ -213,7 +213,7 @@
             CbShowPassword.Location = new Point(435, 622);
             CbShowPassword.Name = "CbShowPassword";
             CbShowPassword.Size = new Size(187, 28);
-            CbShowPassword.TabIndex = 3;
+            CbShowPassword.TabIndex = 5;
             CbShowPassword.Text = "Show Password";
             CbShowPassword.UseVisualStyleBackColor = true;
             CbShowPassword.CheckedChanged += CbShowPassword_CheckedChanged;
@@ -226,7 +226,7 @@
             BtnRegisterForm.Location = new Point(666, 828);
             BtnRegisterForm.Name = "BtnRegisterForm";
             BtnRegisterForm.Size = new Size(162, 60);
-            BtnRegisterForm.TabIndex = 2;
+            BtnRegisterForm.TabIndex = 8;
             BtnRegisterForm.Text = "Register";
             BtnRegisterForm.UseVisualStyleBackColor = false;
             // 
@@ -238,7 +238,7 @@
             BtnRegister.Location = new Point(579, 673);
             BtnRegister.Name = "BtnRegister";
             BtnRegister.Size = new Size(162, 60);
-            BtnRegister.TabIndex = 1;
+            BtnRegister.TabIndex = 6;
             BtnRegister.Text = "Register";
             BtnRegister.UseVisualStyleBackColor = false;
             BtnRegister.Click += BtnRegister_Click;
@@ -252,7 +252,7 @@
             TxtUsername.Name = "TxtUsername";
             TxtUsername.PlaceholderText = "Username";
             TxtUsername.Size = new Size(462, 39);
-            TxtUsername.TabIndex = 0;
+            TxtUsername.TabIndex = 1;
             // 
             // RegisterForm
             // 

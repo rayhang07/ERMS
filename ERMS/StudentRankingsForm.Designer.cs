@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             CmbSelectClass = new ComboBox();
+            DgvRankings = new DataGridView();
+            ((System.ComponentModel.ISupportInitialize)DgvRankings).BeginInit();
             SuspendLayout();
             // 
             // CmbSelectClass
@@ -40,20 +42,34 @@
             CmbSelectClass.Size = new Size(135, 38);
             CmbSelectClass.TabIndex = 1;
             CmbSelectClass.Text = "Table";
+            CmbSelectClass.SelectedIndexChanged += CmbSelectClass_SelectedIndexChanged;
+            // 
+            // DgvRankings
+            // 
+            DgvRankings.Anchor = AnchorStyles.Top;
+            DgvRankings.BackgroundColor = Color.White;
+            DgvRankings.ColumnHeadersHeight = 40;
+            DgvRankings.Location = new Point(5, 189);
+            DgvRankings.Name = "DgvRankings";
+            DgvRankings.Size = new Size(784, 575);
+            DgvRankings.TabIndex = 2;
             // 
             // StudentRankingsForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(794, 766);
+            Controls.Add(DgvRankings);
             Controls.Add(CmbSelectClass);
             Name = "StudentRankingsForm";
             Text = "StudentRankings";
+            ((System.ComponentModel.ISupportInitialize)DgvRankings).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
         private ComboBox CmbSelectClass;
+        private DataGridView DgvRankings;
     }
 }

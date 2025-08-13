@@ -19,6 +19,7 @@ namespace ERMS
 {
     public partial class ResultsAnalyticsForm : Form
     {
+        
 
         private int currentUserId = CurrentUser.UserId;
         private UserRegistrationService userRegistrationService;
@@ -27,14 +28,15 @@ namespace ERMS
             InitializeComponent();
             string dbPath = Path.Combine(Application.StartupPath, "Database", "ERMS.accdb");
             userRegistrationService = new UserRegistrationService(dbPath);
+            
 
         }
 
         private void ResultsAnalyticsForm_Load(object sender, EventArgs e)
         {
-            
 
-            
+
+
             // Set up the tables columns
             DgvResultsAnalytics.Columns.Clear();
             DgvResultsAnalytics.Columns.Add("StudentName", "Student Name");
@@ -53,6 +55,8 @@ namespace ERMS
             DgvResultsAnalytics.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
             DgvResultsAnalytics.DefaultCellStyle.BackColor = Color.White;
             DgvResultsAnalytics.DefaultCellStyle.ForeColor = Color.Black;
+            DgvResultsAnalytics.ColumnHeadersDefaultCellStyle.Font =
+            new Font(DgvResultsAnalytics.ColumnHeadersDefaultCellStyle.Font, FontStyle.Bold);
 
             // Show all information in the table by default
             LoadUserClasses();
@@ -86,7 +90,7 @@ namespace ERMS
                         CmbSelectClass.Items.Clear();
 
                         // Allow empty selection
-                        CmbSelectClass.Items.Add("");
+                        CmbSelectClass.Items.Add("Select Class");
                         while (reader.Read())
                         {
                             CmbSelectClass.Items.Add(reader.GetString(0));
@@ -128,7 +132,7 @@ namespace ERMS
                         CmbSelectSubject.Items.Clear();
 
                         // Allow empty selection
-                        CmbSelectSubject.Items.Add("");
+                        CmbSelectSubject.Items.Add("Select Subject");
                         while (reader.Read())
                         {
                             CmbSelectSubject.Items.Add(reader.GetString(0));
@@ -294,7 +298,7 @@ namespace ERMS
             {
                 // Clears the chart if there is no student
                 ClearChart(ChtStudentProgression);
-                return; 
+                return;
             }
 
             using var conn = userRegistrationService.GetOpenConnection();
@@ -456,7 +460,7 @@ namespace ERMS
                         CmbSelectAssessment.Items.Clear();
 
                         // Allow empty selection
-                        CmbSelectAssessment.Items.Add("");
+                        CmbSelectAssessment.Items.Add("Select Assessment");
                         while (reader.Read())
                         {
                             CmbSelectAssessment.Items.Add(reader.GetString(0));
@@ -619,7 +623,7 @@ namespace ERMS
             LoadResults(selectedClass, selectedSubject, "", "");
             UpdateGradeDistributionChart();
             UpdatePassFailChart();
-            
+
 
             if (!string.IsNullOrWhiteSpace(studentName))
             {
@@ -654,7 +658,7 @@ namespace ERMS
             LoadResults(selectedClass, selectedSubject, selectedAssessment, "");
             UpdateGradeDistributionChart();
             UpdatePassFailChart();
-           
+
         }
 
 
@@ -722,7 +726,7 @@ namespace ERMS
                 INNER JOIN Assessments AS a ON r.AssessmentID = a.AssessmentID)
                 WHERE (s.StudentName = ?) AND (c.ClassName = ?)";
 
-;
+                ;
 
 
                 using (var cmd = new OleDbCommand(checkAssessmentQuery, conn))
@@ -747,9 +751,16 @@ namespace ERMS
             LoadResults(selectedClass, selectedSubject, selectedAssessment, studentSearch);
             UpdateGradeDistributionChart();
             UpdatePassFailChart();
-            UpdateStudentProgressionChart(selectedClass, selectedSubject,studentSearch);
+            UpdateStudentProgressionChart(selectedClass, selectedSubject, studentSearch);
         }
 
-        
+        private void ChtGradeDistribution_Click(object sender, EventArgs e)
+        {
+
+        }
+
+       
+       
     }
 }
+

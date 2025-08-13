@@ -58,6 +58,8 @@ namespace ERMS
             // Set default cell styles
             DgvMyClasses.DefaultCellStyle.BackColor = Color.White;
             DgvMyClasses.DefaultCellStyle.ForeColor = Color.Black;
+            DgvMyClasses.ColumnHeadersDefaultCellStyle.Font =
+            new Font(DgvMyClasses.ColumnHeadersDefaultCellStyle.Font, FontStyle.Bold);
 
             // Load user classes and subjects into combo boxes
             LoadUserClasses();
@@ -117,7 +119,7 @@ namespace ERMS
                         CmbSelectClass.Items.Clear();
 
                         // allow empty selection
-                        CmbSelectClass.Items.Add(""); 
+                        CmbSelectClass.Items.Add("Select Class"); 
                         while (reader.Read())
                         {
                             // Add each class name to the combo box
@@ -150,7 +152,7 @@ namespace ERMS
                         CmbSelectSubject.Items.Clear();
 
                         // Allow empty selection
-                        CmbSelectSubject.Items.Add(""); 
+                        CmbSelectSubject.Items.Add("Select Subject"); 
                         while (reader.Read())
                         {
                             // Add each subject to the combo box

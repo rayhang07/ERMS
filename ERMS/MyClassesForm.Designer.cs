@@ -88,10 +88,10 @@
             DgvMyClasses.BackgroundColor = Color.White;
             DgvMyClasses.ColumnHeadersHeight = 34;
             DgvMyClasses.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            DgvMyClasses.Location = new Point(12, 211);
+            DgvMyClasses.Location = new Point(12, 101);
             DgvMyClasses.Name = "DgvMyClasses";
             DgvMyClasses.RowHeadersWidth = 200;
-            DgvMyClasses.Size = new Size(770, 459);
+            DgvMyClasses.Size = new Size(770, 665);
             DgvMyClasses.TabIndex = 4;
             // 
             // MyClassesForm

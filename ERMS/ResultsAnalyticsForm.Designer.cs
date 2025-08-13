@@ -37,7 +37,11 @@
             ChtGradeDistribution = new OxyPlot.WindowsForms.PlotView();
             ChtPassFail = new OxyPlot.WindowsForms.PlotView();
             ChtStudentProgression = new OxyPlot.WindowsForms.PlotView();
+            panel1 = new Panel();
+            panel2 = new Panel();
             ((System.ComponentModel.ISupportInitialize)DgvResultsAnalytics).BeginInit();
+            panel1.SuspendLayout();
+            panel2.SuspendLayout();
             SuspendLayout();
             // 
             // CmbSelectClass
@@ -98,18 +102,18 @@
             // 
             // DgvResultsAnalytics
             // 
-            DgvResultsAnalytics.Anchor = AnchorStyles.Top;
             DgvResultsAnalytics.BackgroundColor = Color.White;
             DgvResultsAnalytics.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            DgvResultsAnalytics.Location = new Point(25, 415);
+            DgvResultsAnalytics.Dock = DockStyle.Fill;
+            DgvResultsAnalytics.Location = new Point(0, 0);
             DgvResultsAnalytics.Name = "DgvResultsAnalytics";
-            DgvResultsAnalytics.Size = new Size(734, 290);
+            DgvResultsAnalytics.Size = new Size(797, 266);
             DgvResultsAnalytics.TabIndex = 6;
             // 
             // ChtGradeDistribution
             // 
             ChtGradeDistribution.Anchor = AnchorStyles.Top;
-            ChtGradeDistribution.Location = new Point(543, 88);
+            ChtGradeDistribution.Location = new Point(545, 39);
             ChtGradeDistribution.Name = "ChtGradeDistribution";
             ChtGradeDistribution.PanCursor = Cursors.Hand;
             ChtGradeDistribution.Size = new Size(239, 277);
@@ -118,11 +122,12 @@
             ChtGradeDistribution.ZoomHorizontalCursor = Cursors.SizeWE;
             ChtGradeDistribution.ZoomRectangleCursor = Cursors.SizeNWSE;
             ChtGradeDistribution.ZoomVerticalCursor = Cursors.SizeNS;
+            ChtGradeDistribution.Click += ChtGradeDistribution_Click;
             // 
             // ChtPassFail
             // 
             ChtPassFail.Anchor = AnchorStyles.Top;
-            ChtPassFail.Location = new Point(315, 88);
+            ChtPassFail.Location = new Point(317, 39);
             ChtPassFail.Name = "ChtPassFail";
             ChtPassFail.PanCursor = Cursors.Hand;
             ChtPassFail.Size = new Size(222, 299);
@@ -135,7 +140,7 @@
             // ChtStudentProgression
             // 
             ChtStudentProgression.Anchor = AnchorStyles.Top;
-            ChtStudentProgression.Location = new Point(1, 88);
+            ChtStudentProgression.Location = new Point(5, 39);
             ChtStudentProgression.Name = "ChtStudentProgression";
             ChtStudentProgression.PanCursor = Cursors.Hand;
             ChtStudentProgression.Size = new Size(322, 321);
@@ -145,15 +150,34 @@
             ChtStudentProgression.ZoomRectangleCursor = Cursors.SizeNWSE;
             ChtStudentProgression.ZoomVerticalCursor = Cursors.SizeNS;
             // 
+            // panel1
+            // 
+            panel1.Anchor = AnchorStyles.Top;
+            panel1.BorderStyle = BorderStyle.FixedSingle;
+            panel1.Controls.Add(ChtPassFail);
+            panel1.Controls.Add(ChtStudentProgression);
+            panel1.Controls.Add(ChtGradeDistribution);
+            panel1.Location = new Point(-2, 73);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(797, 378);
+            panel1.TabIndex = 10;
+            // 
+            // panel2
+            // 
+            panel2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
+            panel2.Controls.Add(DgvResultsAnalytics);
+            panel2.Location = new Point(-2, 476);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(797, 266);
+            panel2.TabIndex = 10;
+            // 
             // ResultsAnalyticsForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(794, 766);
-            Controls.Add(ChtStudentProgression);
-            Controls.Add(ChtPassFail);
-            Controls.Add(ChtGradeDistribution);
-            Controls.Add(DgvResultsAnalytics);
+            Controls.Add(panel2);
+            Controls.Add(panel1);
             Controls.Add(TxtSearch);
             Controls.Add(BtnSearch);
             Controls.Add(CmbSelectSubject);
@@ -163,6 +187,8 @@
             Text = "ResultsAnalyticsForm";
             Load += ResultsAnalyticsForm_Load;
             ((System.ComponentModel.ISupportInitialize)DgvResultsAnalytics).EndInit();
+            panel1.ResumeLayout(false);
+            panel2.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -178,5 +204,7 @@
         private OxyPlot.WindowsForms.PlotView ChtGradeDistribution;
         private OxyPlot.WindowsForms.PlotView ChtPassFail;
         private OxyPlot.WindowsForms.PlotView ChtStudentProgression;
+        private Panel panel1;
+        private Panel panel2;
     }
 }

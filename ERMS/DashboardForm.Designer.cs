@@ -39,6 +39,8 @@
             LblTopPerformer2 = new Label();
             LblTopClass1 = new Label();
             LblTopClass2 = new Label();
+            PbLogo = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)PbLogo).BeginInit();
             SuspendLayout();
             // 
             // LblWelcomeBackMessage
@@ -59,7 +61,7 @@
             LblDateTime.AutoSize = true;
             LblDateTime.Font = new Font("Segoe UI", 27.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             LblDateTime.ForeColor = Color.Black;
-            LblDateTime.Location = new Point(339, 264);
+            LblDateTime.Location = new Point(339, 326);
             LblDateTime.Name = "LblDateTime";
             LblDateTime.Size = new Size(103, 50);
             LblDateTime.TabIndex = 1;
@@ -72,7 +74,7 @@
             LblImportantDates.AutoSize = true;
             LblImportantDates.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
             LblImportantDates.ForeColor = Color.Black;
-            LblImportantDates.Location = new Point(92, 629);
+            LblImportantDates.Location = new Point(68, 629);
             LblImportantDates.Name = "LblImportantDates";
             LblImportantDates.Size = new Size(202, 32);
             LblImportantDates.TabIndex = 2;
@@ -85,7 +87,7 @@
             LblTopPerformers.AutoSize = true;
             LblTopPerformers.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
             LblTopPerformers.ForeColor = Color.Black;
-            LblTopPerformers.Location = new Point(334, 629);
+            LblTopPerformers.Location = new Point(350, 629);
             LblTopPerformers.Name = "LblTopPerformers";
             LblTopPerformers.Size = new Size(191, 32);
             LblTopPerformers.TabIndex = 3;
@@ -98,7 +100,7 @@
             LblTopClasses.AutoSize = true;
             LblTopClasses.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
             LblTopClasses.ForeColor = Color.Black;
-            LblTopClasses.Location = new Point(557, 629);
+            LblTopClasses.Location = new Point(590, 629);
             LblTopClasses.Name = "LblTopClasses";
             LblTopClasses.Size = new Size(144, 32);
             LblTopClasses.TabIndex = 4;
@@ -111,7 +113,7 @@
             LblExamDate2.AutoSize = true;
             LblExamDate2.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold);
             LblExamDate2.ForeColor = Color.Black;
-            LblExamDate2.Location = new Point(92, 714);
+            LblExamDate2.Location = new Point(68, 714);
             LblExamDate2.Name = "LblExamDate2";
             LblExamDate2.Size = new Size(53, 25);
             LblExamDate2.TabIndex = 5;
@@ -124,7 +126,7 @@
             LblExamDate1.AutoSize = true;
             LblExamDate1.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold);
             LblExamDate1.ForeColor = Color.Black;
-            LblExamDate1.Location = new Point(92, 684);
+            LblExamDate1.Location = new Point(68, 684);
             LblExamDate1.Name = "LblExamDate1";
             LblExamDate1.Size = new Size(53, 25);
             LblExamDate1.TabIndex = 6;
@@ -137,7 +139,7 @@
             LblTopPerformer1.AutoSize = true;
             LblTopPerformer1.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold);
             LblTopPerformer1.ForeColor = Color.Black;
-            LblTopPerformer1.Location = new Point(334, 684);
+            LblTopPerformer1.Location = new Point(350, 684);
             LblTopPerformer1.Name = "LblTopPerformer1";
             LblTopPerformer1.Size = new Size(141, 25);
             LblTopPerformer1.TabIndex = 7;
@@ -150,7 +152,7 @@
             LblTopPerformer2.AutoSize = true;
             LblTopPerformer2.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold);
             LblTopPerformer2.ForeColor = Color.Black;
-            LblTopPerformer2.Location = new Point(334, 714);
+            LblTopPerformer2.Location = new Point(350, 714);
             LblTopPerformer2.Name = "LblTopPerformer2";
             LblTopPerformer2.Size = new Size(141, 25);
             LblTopPerformer2.TabIndex = 8;
@@ -163,7 +165,7 @@
             LblTopClass1.AutoSize = true;
             LblTopClass1.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold);
             LblTopClass1.ForeColor = Color.Black;
-            LblTopClass1.Location = new Point(557, 684);
+            LblTopClass1.Location = new Point(590, 684);
             LblTopClass1.Name = "LblTopClass1";
             LblTopClass1.Size = new Size(93, 25);
             LblTopClass1.TabIndex = 9;
@@ -176,18 +178,31 @@
             LblTopClass2.AutoSize = true;
             LblTopClass2.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold);
             LblTopClass2.ForeColor = Color.Black;
-            LblTopClass2.Location = new Point(557, 714);
+            LblTopClass2.Location = new Point(590, 714);
             LblTopClass2.Name = "LblTopClass2";
             LblTopClass2.Size = new Size(93, 25);
             LblTopClass2.TabIndex = 10;
             LblTopClass2.Text = "Top Class";
             LblTopClass2.TextAlign = ContentAlignment.MiddleCenter;
             // 
+            // PbLogo
+            // 
+            PbLogo.Anchor = AnchorStyles.Top;
+            PbLogo.BackgroundImage = Properties.Resources.logo;
+            PbLogo.BackgroundImageLayout = ImageLayout.Zoom;
+            PbLogo.Location = new Point(209, 128);
+            PbLogo.Name = "PbLogo";
+            PbLogo.Size = new Size(357, 173);
+            PbLogo.TabIndex = 11;
+            PbLogo.TabStop = false;
+            PbLogo.Click += PbLogo_Click;
+            // 
             // DashboardForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(794, 766);
+            Controls.Add(PbLogo);
             Controls.Add(LblTopClass2);
             Controls.Add(LblTopClass1);
             Controls.Add(LblTopPerformer2);
@@ -202,6 +217,7 @@
             Name = "DashboardForm";
             Text = "DashboardForm";
             Load += DashboardForm_Load;
+            ((System.ComponentModel.ISupportInitialize)PbLogo).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -219,5 +235,6 @@
         private Label LblTopPerformer2;
         private Label LblTopClass1;
         private Label LblTopClass2;
+        private PictureBox PbLogo;
     }
 }

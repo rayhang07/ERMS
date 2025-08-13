@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StartupForm));
             PnlWelcomePanel = new Panel();
             LblWelcomeMessage = new Label();
             PnlContainer = new Panel();
@@ -73,6 +74,7 @@
             ClientSize = new Size(1884, 911);
             Controls.Add(PnlContainer);
             Controls.Add(PnlWelcomePanel);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MinimumSize = new Size(1900, 950);
             Name = "StartupForm";
             Text = "StartupForm";

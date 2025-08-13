@@ -154,6 +154,7 @@ namespace ERMS
             {
                 if (conn == null) return upcomingAssessments;
 
+                // SQL query to get the top 2 upcoming assessments for the current user
                 string query = @"
             SELECT TOP 2 a.AssessmentName, a.AssessmentDate
             FROM Assessments a
