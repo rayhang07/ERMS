@@ -194,20 +194,19 @@ namespace ERMS
                 return;
             }
 
-            // Gets the Assesment name, date, score and grade by joining necessary tables
+            // Gets the Assessment name, date, score and grade by joining necessary tables
             string query = @"
-        SELECT 
-            a.AssessmentName, 
-            a.AssessmentDate, 
-            r.Score, 
-            r.Grade
-        FROM ((((Results r
-        INNER JOIN Assessments a ON r.AssessmentID = a.AssessmentID)
-        INNER JOIN StudentClasses sc ON r.EnrollmentID = sc.EnrollmentID)
-        INNER JOIN Students s ON sc.StudentID = s.StudentID)
-        INNER JOIN Class c ON sc.ClassID = c.ClassID)
-        WHERE s.StudentName LIKE ? AND c.ClassName = ?
-        ORDER BY a.AssessmentDate";
+            SELECT 
+                a.AssessmentName, 
+                a.AssessmentDate, 
+                r.Score, 
+                r.Grade
+            FROM ((((Results r
+            INNER JOIN Assessments a ON r.AssessmentID = a.AssessmentID)
+            INNER JOIN StudentClasses sc ON r.EnrollmentID = sc.EnrollmentID)
+            INNER JOIN Students s ON sc.StudentID = s.StudentID)
+            INNER JOIN Class c ON sc.ClassID = c.ClassID)
+            WHERE s.StudentName LIKE ? AND c.ClassName = ?";
 
             using var cmd = new OleDbCommand(query, conn);
             cmd.Parameters.AddWithValue("?", $"%{studentName}%");
@@ -215,22 +214,76 @@ namespace ERMS
 
             using var reader = cmd.ExecuteReader();
 
+            // Clear previous rows
             DgvReports.Rows.Clear();
 
+            // Temporary lists to hold the data
+            List<DateTime> dates = new();
+            List<int> scores = new();
+            List<string> assessmentNames = new();
+            List<string> grades = new();
+
+            // Read from database and fill temporary lists
             while (reader.Read())
             {
-                // Adds the data to the table
+                assessmentNames.Add(reader["AssessmentName"].ToString());
+                dates.Add(Convert.ToDateTime(reader["AssessmentDate"]));
+                scores.Add(Convert.ToInt32(reader["Score"]));
+                grades.Add(reader["Grade"].ToString());
+            }
+
+            // variables to hold temporary data while sorting
+            int tempScore = 0;
+            string tempName = "";
+            DateTime tempDate;
+
+            // Bubble sort to sort the data by date
+            for (int write = 0; write < dates.Count; write++)
+            {
+                // Each pass through the list
+                for (int sort = 0; sort < dates.Count - 1; sort++)
+                {
+                    // Compare adjacent elements
+                    if (dates[sort] > dates[sort + 1])
+                    {
+                        // Swap dates
+                        tempDate = dates[sort + 1];
+                        dates[sort + 1] = dates[sort];
+                        dates[sort] = tempDate;
+
+                        // Swap scores
+                        tempScore = scores[sort + 1];
+                        scores[sort + 1] = scores[sort];
+                        scores[sort] = tempScore;
+
+                        // Swap assessment names
+                        tempName = assessmentNames[sort + 1];
+                        assessmentNames[sort + 1] = assessmentNames[sort];
+                        assessmentNames[sort] = tempName;
+
+                        // Swap grades
+                        var tempGrade = grades[sort + 1];
+                        grades[sort + 1] = grades[sort];
+                        grades[sort] = tempGrade;
+                    }
+                }
+            }
+
+            // Add sorted data to the DataGridView
+            for (int i = 0; i < dates.Count; i++)
+            {
                 DgvReports.Rows.Add(
-                    reader["AssessmentName"].ToString(),
-                    reader["Score"].ToString(),
-                    reader["Grade"].ToString()
+                    assessmentNames[i],
+                    scores[i].ToString(),
+                    grades[i]
                 );
             }
 
-            // Appends the labels with the searched student's information and todays date
+            // Update labels
             LblClassName.Text = $"Class: {className}";
             LblName.Text = $"Name: {studentName}";
             LblDate.Text = "Date: " + DateTime.Now.ToString("dd/MM/yyyy");
+        
         }
 
         private void BtnShare_Click(object sender, EventArgs e)

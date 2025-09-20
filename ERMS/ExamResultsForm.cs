@@ -50,24 +50,30 @@ namespace ERMS
 
         private void BtnSaveCreate_Click(object sender, EventArgs e)
         {
+            // Gets the values from the text boxes
             string className = TxtClassNameCreate.Text.Trim();
             string subject = TxtSubjectCreate.Text.Trim();
             string year = TxtYearCreate.Text.Trim();
             string assessmentName = TxtAssessmentNameCreate.Text.Trim();
             string date = TxtDateCreate.Text.Trim();
 
+
+            // Creates an instance of the ExamResultsManagementService
             var examService = new ExamResultsManagementService();
 
             bool success = examService.CreateAssessment(className, subject, year, assessmentName, date);
 
             if (success)
             {
+                // Updates the labels with the last added assessment information
                 LblClassNameLast.Text = className;
                 LblSubjectLast.Text = subject;
                 LblYearLast.Text = year;
                 LblAssessmentNameLast.Text = assessmentName;
                 LblDateLast.Text = date;
 
+
+                // Clears the text boxes
                 TxtClassNameCreate.Clear();
                 TxtSubjectCreate.Clear();
                 TxtYearCreate.Clear();
@@ -79,6 +85,7 @@ namespace ERMS
             }
             else
             {
+                // If the addition fails, resets the labels to default values
                 LblClassNameLast.Text = "Class Name";
                 LblSubjectLast.Text = "Subject";
                 LblYearLast.Text = "Year";
@@ -90,6 +97,7 @@ namespace ERMS
 
         private void BtnSaveAdd_Click(object sender, EventArgs e)
         {
+            // Gets the values from the text boxes
             string studentName = TxtStudentNameAdd.Text.Trim();
             string studentId = TxtStudentIDAdd.Text.Trim();
             string className = TxtClassNameAdd.Text.Trim();
@@ -97,12 +105,15 @@ namespace ERMS
             string score = TxtScoreAdd.Text.Trim();
             string grade = TxtGradeAdd.Text.Trim();
 
+
+            // Creates an instance of the ExamResultsManagementService
             var examService = new ExamResultsManagementService();
 
             bool success = examService.AddResult(studentName, studentId, className, assessmentName, score, grade);
 
             if (success)
             {
+                // Updates the labels with the last added students information
                 LblStudentNameAddLast.Text = studentName;
                 LblStudentIDAddLast.Text = studentId;
                 LblClassNameAddLast.Text = className;
@@ -110,6 +121,8 @@ namespace ERMS
                 LblScoreAddLast.Text = score;
                 LblGradeAddLast.Text = grade;
 
+
+                // clears textboxes
                 TxtStudentNameAdd.Clear();
                 TxtStudentIDAdd.Clear();
                 TxtClassNameAdd.Clear();
@@ -119,6 +132,7 @@ namespace ERMS
             }
             else
             {
+                // If the addition fails, resets the labels to default values
                 LblStudentNameAddLast.Text = "Student Name";
                 LblStudentIDAddLast.Text = "Student ID";
                 LblClassNameAddLast.Text = "Class Name";
@@ -130,6 +144,7 @@ namespace ERMS
 
         private void BtnSaveRemove_Click(object sender, EventArgs e)
         {
+            // Gets the values from the text boxes
             string studentName = TxtStudentNameRemove.Text.Trim();
             string studentId = TxtStudentIDRemove.Text.Trim();
             string className = TxtClassNameRemove.Text.Trim();
@@ -137,12 +152,14 @@ namespace ERMS
             string score = TxtScoreRemove.Text.Trim();
             string grade = TxtGradeRemove.Text.Trim();
 
+            // Creates an instance of the ExamResultsManagementService
             var examService = new ExamResultsManagementService();
 
             bool success = examService.RemoveResult(studentName, studentId, className, assessmentName, score, grade);
 
             if (success)
             {
+                // Updates the labels with the last removed students information
                 LblStudentNameRemovedLast.Text = studentName;
                 LblStudentIDRemovedLast.Text = studentId;
                 LblClassNameRemovedLast.Text = className;
@@ -150,7 +167,7 @@ namespace ERMS
                 LblScoreRemovedLast.Text = score;
                 LblGradeRemovedLast.Text = grade;
 
-
+                // Clears texboxes
                 TxtStudentNameRemove.Clear();
                 TxtStudentIDRemove.Clear();
                 TxtClassNameRemove.Clear();
@@ -160,6 +177,7 @@ namespace ERMS
             }
             else
             {
+                // If the removal fails, resets the labels to default values
                 LblStudentNameRemovedLast.Text = "Student Name";
                 LblStudentIDRemovedLast.Text = "Student ID";
                 LblClassNameRemovedLast.Text = "Class Name";

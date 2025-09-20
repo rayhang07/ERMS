@@ -36,7 +36,7 @@ namespace ERMS
             // Set header styles
             DgvRankings.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(128, 64, 0);
 
-            // Set header text color
+            // Set header text colour
             DgvRankings.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
 
             // Set default cell styles

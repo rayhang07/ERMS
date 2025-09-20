@@ -125,19 +125,13 @@ namespace ERMS
         // Connection string to connect to the database
         private readonly string connectionString;
 
-        // Variable to see how many failed login attempts have occurred
-        
-
-        // Stores the time until which the account is locked
-        
-
-        // Builds connection string using database path
+       
         public UserLoginService(string dbPath)
         {
             connectionString = $@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={dbPath};Persist Security Info=False;";
         }
         
-        // Opens and returns a connection to the database
+        
         private OleDbConnection GetOpenConnection()
         {   
             // Try to establish a connection
@@ -198,7 +192,7 @@ namespace ERMS
 
                             if (VerifyPassword(password, storedHashBase64))
                             {
-                                // Successful login: reset attempts and set current user info
+                                // Successful login, reset the attempts and set current user info
                                 loginAttempts = 0;
 
                                 CurrentUser.UserId = userIdFromDb;

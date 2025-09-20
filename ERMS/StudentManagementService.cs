@@ -261,8 +261,8 @@ namespace ERMS
                     }
                 }
 
-                // Normalize studentName (trim whitespace)
-                string normalizedStudentName = studentName.Trim();
+               
+                string newStudentName = studentName.Trim();
 
                 // Check if the student already exists in Students table by StudentID
                 bool studentExists = false;
@@ -280,7 +280,7 @@ namespace ERMS
                     string insertStudentQuery = "INSERT INTO Students (StudentName, StudentID) VALUES (?, ?)";
                     using (var cmd = new OleDbCommand(insertStudentQuery, conn))
                     {
-                        cmd.Parameters.AddWithValue("?", normalizedStudentName);
+                        cmd.Parameters.AddWithValue("?", newStudentName);
                         cmd.Parameters.AddWithValue("?", studentId);
 
                         try
@@ -302,7 +302,7 @@ namespace ERMS
                     }
                 }
 
-                // Check if enrollment already exists (student in class)
+                // Check if enrollment already exists
                 string checkEnrollmentQuery = "SELECT COUNT(*) FROM StudentClasses WHERE StudentID = ? AND ClassID = ?";
                 using (var cmd = new OleDbCommand(checkEnrollmentQuery, conn))
                 {
@@ -317,7 +317,7 @@ namespace ERMS
                     }
                 }
 
-                // Insert enrollment (student-class link)
+                // Insert enrollment 
                 string insertEnrollmentQuery = "INSERT INTO StudentClasses (StudentID, ClassID) VALUES (?, ?)";
                 using (var cmd = new OleDbCommand(insertEnrollmentQuery, conn))
                 {
@@ -413,7 +413,7 @@ namespace ERMS
                     }
                 }
 
-                // Check if the enrollment exists (optional but useful)
+                // Check if the enrollment exists 
                 string checkEnrollmentQuery = "SELECT COUNT(*) FROM StudentClasses WHERE StudentID = ? AND ClassID = ?";
                 using (var cmd = new OleDbCommand(checkEnrollmentQuery, conn))
                 {
@@ -428,7 +428,7 @@ namespace ERMS
                     }
                 }
 
-                // Delete the enrollment record (remove student from class)
+                // Delete the enrollment record
                 string deleteEnrollmentQuery = "DELETE FROM StudentClasses WHERE StudentID = ? AND ClassID = ?";
                 using (var cmd = new OleDbCommand(deleteEnrollmentQuery, conn))
                 {

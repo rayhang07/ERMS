@@ -21,6 +21,7 @@ namespace ERMS
 
         // Sets the timeout threshold 
         private const int TimeoutSeconds = 300;
+        
 
         private Point lastMousePosition;
 
@@ -41,7 +42,7 @@ namespace ERMS
             lastMousePosition = Cursor.Position;
 
 
-            // calls the method to hide submenus on startup
+            // Calls the method to hide submenus on startup
             CustomiseDesign();
             OpenChildForm(new DashboardForm());
             PnlNav.Top = BtnDashboard.Top;
@@ -255,7 +256,13 @@ namespace ERMS
                 bool shouldCheckUnsaved = false;
 
                 Type[] formsToCheck = new Type[]
-                { typeof(CreateClassForm), typeof(ManageClassForm), typeof(ExamResultsForm), typeof(MyAccountForm), typeof(ReportForm)
+                { 
+                  // Check these forms for unsaved data
+                  typeof(CreateClassForm),
+                  typeof(ManageClassForm),
+                  typeof(ExamResultsForm), 
+                  typeof(MyAccountForm),
+                  typeof(ReportForm)
                 };
 
                 if (activeForm != null)
@@ -273,7 +280,8 @@ namespace ERMS
                 if (shouldCheckUnsaved && UnsavedChangesService.HasUnsavedChanges(activeForm))
                 {
                     Sound.PlayError();
-                    var unsavedResult = MessageBox.Show(
+                    var unsavedResult = MessageBox.Show
+                    (
                         "You have unsaved changes. Are you sure you want to exit without saving?",
                         "Unsaved Changes",
                         MessageBoxButtons.YesNo,
@@ -290,7 +298,8 @@ namespace ERMS
                 else
                 {
                     Sound.PlayError();
-                    var exitResult = MessageBox.Show(
+                    var exitResult = MessageBox.Show
+                    (
                         "Are you sure you want to exit?",
                         "Exit Confirmation",
                         MessageBoxButtons.YesNo,
@@ -319,12 +328,12 @@ namespace ERMS
             {
                 Type[] formsToCheck = new Type[]
                 {
-            // Checks these forms for unsaved data
-            typeof(CreateClassForm),
-            typeof(ExamResultsForm),
-            typeof(ManageClassForm),
-            typeof(MyAccountForm),
-            typeof(ReportForm)
+                    // Checks these forms for unsaved data
+                    typeof(CreateClassForm),
+                    typeof(ExamResultsForm),
+                    typeof(ManageClassForm),
+                    typeof(MyAccountForm),
+                    typeof(ReportForm)
                     
                 };
 
@@ -459,11 +468,16 @@ namespace ERMS
         {
             bool canLogout = false;
 
-            // List or array of types to check
+            // Check these forms for unsaved data
             Type[] formsToCheck = new Type[]
-            { typeof(CreateClassForm), typeof(ManageClassForm), typeof(ExamResultsForm), typeof(MyAccountForm), typeof(ReportForm)
+            { 
+                typeof(CreateClassForm),
+                typeof(ManageClassForm),
+                typeof(ExamResultsForm), 
+                typeof(MyAccountForm), 
+                typeof(ReportForm)
 
-                // add any other forms you want to check here
+                
             };
 
             bool shouldCheckUnsaved = false;
@@ -482,8 +496,10 @@ namespace ERMS
 
             if (shouldCheckUnsaved && UnsavedChangesService.HasUnsavedChanges(activeForm))
             {
+                // Alerts the user if there are unsaved changes
                 Sound.PlayError();
-                var unsavedResult = MessageBox.Show(
+                var unsavedResult = MessageBox.Show
+                (
                     "You have unsaved changes. Do you want to logout anyway?",
                     "Unsaved Changes",
                     MessageBoxButtons.YesNo,
@@ -491,14 +507,16 @@ namespace ERMS
 
                 );
 
+                // If the user decides to leave without saving
                 if (unsavedResult == DialogResult.Yes)
-                    canLogout = true; // User confirmed despite unsaved changes
+                    canLogout = true; 
             }
             else
             {
-                // No unsaved changes, or form doesn't require check - ask regular logout confirmation
+                // If there are no unsaved changes to be checked logout normally.
                 Sound.PlayError();
-                var logoutResult = MessageBox.Show(
+                var logoutResult = MessageBox.Show
+                (
                     "Do you want to logout?",
                     "Confirm Logout",
                     MessageBoxButtons.YesNo,
@@ -511,17 +529,15 @@ namespace ERMS
 
             if (canLogout)
             {
-                // Proceed with logout
+                // Logout
                 this.Hide();
                 _startupForm.Show();
 
-                // Clear current user data
-                CurrentUser.UserId = 0;
-                CurrentUser.Username = null;
-                CurrentUser.FullName = null;
-                CurrentUser.Email = null;
+                // Clear the current users data
+                CurrentUser.Clear();
+                
             }
-            // else user cancelled logout - do nothing
+            // If user cancelled logout, do nothing
         }
 
 

@@ -83,24 +83,23 @@ namespace ERMS
 
         private void BtnRegister_Click(object sender, EventArgs e)
         {
-            
-
-
 
             // Get input values from input fields
             string name = TxtName.Text.Trim();
             string username = TxtUsername.Text.Trim();
             string email = TxtEmail.Text.Trim();
-            string password = TxtPassword.Text;  // do NOT trim passwords
+
+            // do NOT trim passwords as it changes the password
+            string password = TxtPassword.Text;  
             string confirmPassword = TxtConfirmPassword.Text;
 
-            // Create the service with the path 
+            // Create an instance of the class 
             string dbPath = Path.Combine(Application.StartupPath, "Database", "ERMS.accdb");
             var userService = new UserRegistrationService(dbPath);
 
 
 
-            // Call RegisterUser and handle outputs
+            // Call RegisterUser method and handle process using the inputs
             if (userService.RegisterUser(name, username, email, password, confirmPassword, out string errorMessage))
             {
                 Sound.PlaySuccess();
@@ -115,7 +114,7 @@ namespace ERMS
             }
             else
             {
-                // Show the validation or duplicate error
+                // Show the error
                 Sound.PlayError();
                 MessageBox.Show(errorMessage, "Registration Failed");
             }
@@ -149,7 +148,7 @@ namespace ERMS
             }
             catch (Exception ex)
             {
-            // Handle or log the exception
+            // Handle exception
             Sound.PlayError();
             MessageBox.Show("Database connection failed: " + ex.Message);
                 return null;

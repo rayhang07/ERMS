@@ -37,7 +37,7 @@ namespace ERMS
         {
             base.OnPaint(e);
 
-            // Initialize the list of labels to include all labels that need lines drawn around them
+            // Initialise the list of labels to include all labels that need lines drawn around them
             List<System.Windows.Forms.Label> myLabels = new List<System.Windows.Forms.Label>
             {
                 LblImportantDates,
@@ -51,7 +51,7 @@ namespace ERMS
                 LblTopPerformer2
             };
 
-            // Call the helper method to draw lines above and below the group of labels
+            // Call the method to draw lines above and below the group of labels
             LineDrawer.DrawLinesAroundLabels(this, e, myLabels);
         }
 
@@ -59,7 +59,7 @@ namespace ERMS
 
         private void DashboardForm_Load(object sender, EventArgs e)
         {
-            // Presents a welcome back message with the users full name
+            // Presents a welcome back message with the users fullname
             LblWelcomeBackMessage.Text = $"Welcome back {CurrentUser.FullName}";
 
             // Center the LblWelcomeBackMessage label horizontally 
@@ -232,18 +232,18 @@ namespace ERMS
 
         }
     }
-    // Static helper class  for drawing lines around a list of labels so can be inherited
+    // Static class for drawing lines around a list of labels so can be inherited
     public static class LineDrawer
     {
         // Method to draw two horizontal lines above and below the group of labels passed in
         public static void DrawLinesAroundLabels(Control container, PaintEventArgs e, List<System.Windows.Forms.Label> labels)
 
         {   
-            // If the label list is null or empty, nothing to draw
+            // If the label list is null or empty there is nothing to draw
             if (labels == null || labels.Count == 0)
                 return;
 
-            // Initialize variables to find the bounding rectangle around all labels
+            // Initialise variables to find the size needed around the labels
             int left = int.MaxValue;
             int right = int.MinValue;
             int top = int.MaxValue;
@@ -270,14 +270,14 @@ namespace ERMS
 
             if (isParentMaximized)
             {
-                // If fullscreen, draw the lines to be 60% of the form width and centered horizontally
+                // If fullscreen, draw the lines to be 60% of the form width and centered 
                 int lineLength = (int)(formWidth * 0.6);
                 startX = (formWidth - lineLength) / 2;
                 endX = startX + lineLength;
             }
             else
             {
-                // Otherwise, draw lines exactly spanning the leftmost to rightmost label edges
+                // Otherwise, draw lines the fill the size that the user has resized to
                 startX = left;
                 endX = right;
             }

@@ -22,7 +22,7 @@ namespace ERMS
         {
             base.OnPaint(e);
 
-            // Creates a list of labels
+            // Initialise the list of labels to include all labels that need lines drawn around them
             List<System.Windows.Forms.Label> myLabels = new List<System.Windows.Forms.Label>
             {
                 LblLastClassDeleted,
@@ -40,7 +40,8 @@ namespace ERMS
 
 
             };
-            // Draws a line around the labels
+            
+            // Calls the method to draw lines above and below the group of labels
             LineDrawer.DrawLinesAroundLabels(this, e, myLabels);
         }
 

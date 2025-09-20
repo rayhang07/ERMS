@@ -148,20 +148,19 @@ namespace ERMS
             string dbPath = Path.Combine(Application.StartupPath, "Database", "ERMS.accdb");
             var userRegService = new UserRegistrationService(dbPath);
 
-            var upcomingAssessments = new List<(string, string)>();
+            var upcomingAssessments = new List<(string AssessmentName, string AssessmentDate)>();
 
             using (var conn = userRegService.GetOpenConnection())
             {
                 if (conn == null) return upcomingAssessments;
 
-                // SQL query to get the top 2 upcoming assessments for the current user
+                // SQL query to get upcoming assessments (without ORDER BY)
                 string query = @"
-            SELECT TOP 2 a.AssessmentName, a.AssessmentDate
+            SELECT a.AssessmentName, a.AssessmentDate
             FROM Assessments a
             INNER JOIN Class c ON a.ClassID = c.ClassID
             WHERE c.UserID = ?
-              AND CDate(a.AssessmentDate) >= Date()
-            ORDER BY CDate(a.AssessmentDate) ASC";
+              AND CDate(a.AssessmentDate) >= Date()";
 
                 using (var cmd = new OleDbCommand(query, conn))
                 {
@@ -179,8 +178,42 @@ namespace ERMS
                 }
             }
 
-            return upcomingAssessments;
+            // Sort assessments by date using bubble sort
+            List<DateTime> dates = upcomingAssessments.Select(a => DateTime.Parse(a.AssessmentDate)).ToList();
+            List<string> names = upcomingAssessments.Select(a => a.AssessmentName).ToList();
+
+            
+            for (int write = 0; write < dates.Count; write++)
+            {
+                for (int sort = 0; sort < dates.Count - 1; sort++)
+                {
+                    // Compare adjacent dates
+                    if (dates[sort] > dates[sort + 1])
+                    {
+                        // Swap dates
+                        var tempDate = dates[sort + 1];
+                        dates[sort + 1] = dates[sort];
+                        dates[sort] = tempDate;
+
+                        // Swap names 
+                        var tempName = names[sort + 1];
+                        names[sort + 1] = names[sort];
+                        names[sort] = tempName;
+                    }
+                }
+            }
+
+            // Reconstruct sorted list
+            var sortedAssessments = new List<(string AssessmentName, string AssessmentDate)>();
+            for (int i = 0; i < dates.Count; i++)
+            {
+                sortedAssessments.Add((names[i], dates[i].ToShortDateString()));
+            }
+
+            // Return only the top 2 upcoming assessments
+            return sortedAssessments.Take(2).ToList();
         }
+
 
         public bool AddResult(string studentName, string studentId, string className, string assessmentName, string score, string grade)
         {

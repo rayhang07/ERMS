@@ -19,7 +19,7 @@ namespace ERMS
         {
             InitializeComponent();
 
-            // Attach the Load event handler method 'StarupForm_Load'
+            // Attach the Load event handler method 
             this.Load += StartupForm_Load;
 
             // Immediately loads the LoginForm in the panel container, so it is shown by default on startup
@@ -82,28 +82,29 @@ namespace ERMS
         {
             // Infinite loop to cycle messages
             while (true)
+            {
                 foreach (string message in messages)
                 {
                     // Type out the message letter by letter
                     label.Text = "";
-                    foreach (char c in message)
+                    for (int i = 0; i < message.Length; i++)
                     {
-                        label.Text += c;
+                        label.Text += message[i];
                         await Task.Delay(typeDelay);
                     }
 
-                    // Pause after typing out the message
+                    // Pause after typing
                     await Task.Delay(pauseDelay);
 
                     // Delete the message letter by letter
-                    while (label.Text.Length > 0)
+                    for (int i = message.Length - 1; i >= 0; i--)
                     {
-                        label.Text = label.Text.Substring(0, label.Text.Length - 1);
+                        label.Text = message.Substring(0, i);
                         await Task.Delay(typeDelay);
                     }
                 }
+            }
         }
-
         private void PnlContainer_Paint(object sender, PaintEventArgs e)
         {
 

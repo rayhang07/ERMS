@@ -65,7 +65,7 @@ namespace ERMS
             LoadResults("", "", "", "");
             UpdateGradeDistributionChart();
             UpdatePassFailChart();
-            InitializeEmptyStudentProgressionChart();
+            InitialiseEmptyStudentProgressionChart();
 
 
         }
@@ -296,7 +296,6 @@ namespace ERMS
         {
             if (string.IsNullOrWhiteSpace(studentName))
             {
-                // Clears the chart if there is no student
                 ClearChart(ChtStudentProgression);
                 return;
             }
@@ -309,20 +308,19 @@ namespace ERMS
                 return;
             }
 
-            // Gets the assessment name, date and students score by joining tables.
             string query = @"
-        SELECT 
-            a.AssessmentName, 
-            a.AssessmentDate, 
-            r.Score
-        FROM 
-            ((((Results r
-            INNER JOIN Assessments a ON r.AssessmentID = a.AssessmentID)
-            INNER JOIN StudentClasses sc ON r.EnrollmentID = sc.EnrollmentID)
-            INNER JOIN Students s ON sc.StudentID = s.StudentID)
-            INNER JOIN Class c ON sc.ClassID = c.ClassID)
-        WHERE 
-            s.StudentName = ?";
+ SELECT 
+     a.AssessmentName, 
+     a.AssessmentDate, 
+     r.Score
+ FROM 
+     ((((Results r
+     INNER JOIN Assessments a ON r.AssessmentID = a.AssessmentID)
+     INNER JOIN StudentClasses sc ON r.EnrollmentID = sc.EnrollmentID)
+     INNER JOIN Students s ON sc.StudentID = s.StudentID)
+     INNER JOIN Class c ON sc.ClassID = c.ClassID)
+ WHERE 
+     s.StudentName = ?";
 
             var parameters = new List<OleDbParameter> { new OleDbParameter("StudentName", studentName) };
 
@@ -338,8 +336,6 @@ namespace ERMS
                 parameters.Add(new OleDbParameter("Subject", subject));
             }
 
-            query += " ORDER BY a.AssessmentDate";
-
             using var cmd = new OleDbCommand(query, conn);
             cmd.Parameters.AddRange(parameters.ToArray());
 
@@ -354,21 +350,53 @@ namespace ERMS
                 MarkerStroke = OxyColors.DarkBlue
             };
 
-            // Assessment names in order
             var assessmentNames = new List<string>();
-            var scores = new List<double>();
+            var scores = new List<int>();
+            var dates = new List<DateTime>();
 
             while (reader.Read())
             {
                 string assessmentName = reader["AssessmentName"].ToString();
-                double score = Convert.ToDouble(reader["Score"]);
+                int score = Convert.ToInt32(reader["Score"]);
+                DateTime date = Convert.ToDateTime(reader["AssessmentDate"]);
 
-                // Add Assessment names and scores in order from db
                 assessmentNames.Add(assessmentName);
                 scores.Add(score);
+                dates.Add(date);
             }
 
-            // Add assessment names to the CategoryAxis labels
+            // temp variables for sorting
+            int tempScore = 0;
+            string tempName = "";
+            DateTime tempDate;
+
+            // Bubble sort to sort the assessments by date
+            for (int write = 0; write < dates.Count; write++)
+            {
+                // Goes through every date
+                for (int sort = 0; sort < dates.Count - 1; sort++)
+                {
+                    // Compares two dates
+                    if (dates[sort] > dates[sort + 1])
+                    {
+                        // Swaps the dates
+                        tempDate = dates[sort + 1];
+                        dates[sort + 1] = dates[sort];
+                        dates[sort] = tempDate;
+
+                        // Swaps the scores
+                        tempScore = scores[sort + 1];
+                        scores[sort + 1] = scores[sort];
+                        scores[sort] = tempScore;
+
+                        // Swaps the assessment names
+                        tempName = assessmentNames[sort + 1];
+                        assessmentNames[sort + 1] = assessmentNames[sort];
+                        assessmentNames[sort] = tempName;
+                    }
+                }
+            }
+
             var categoryAxis = new CategoryAxis
             {
                 Position = AxisPosition.Bottom,
@@ -376,7 +404,6 @@ namespace ERMS
             };
             categoryAxis.Labels.AddRange(assessmentNames);
 
-            // Add points: X = individual assessment name, Y = score
             for (int i = 0; i < scores.Count; i++)
             {
                 lineSeries.Points.Add(new DataPoint(i, scores[i]));
@@ -396,14 +423,14 @@ namespace ERMS
 
             ChtStudentProgression.Model = plotModel;
             ChtStudentProgression.InvalidatePlot(true);
-
         }
 
-        private void InitializeEmptyStudentProgressionChart()
+
+        private void InitialiseEmptyStudentProgressionChart()
         {
             var model = new PlotModel { Title = "Student Progression" };
 
-            // Add axes
+            // Add axis
             model.Axes.Add(new OxyPlot.Axes.CategoryAxis
             {
                 Position = OxyPlot.Axes.AxisPosition.Bottom,
@@ -618,7 +645,7 @@ namespace ERMS
             string selectedClass = CmbSelectClass.SelectedItem?.ToString() ?? "";
             string selectedSubject = CmbSelectSubject.SelectedItem?.ToString() ?? "";
 
-            // Calls methods that are required
+            // Passes in this into methods
             LoadAssessments(selectedClass, selectedSubject);
             LoadResults(selectedClass, selectedSubject, "", "");
             UpdateGradeDistributionChart();
@@ -630,7 +657,6 @@ namespace ERMS
                 if (!string.IsNullOrEmpty(selectedSubject) && string.IsNullOrEmpty(selectedClass))
                 {
                     // Only subject is selected
-                    // Call your progression update with only subject filter
                     UpdateStudentProgressionChart("", selectedSubject, studentName);
                 }
                 else if (!string.IsNullOrEmpty(selectedClass))
