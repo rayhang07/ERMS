@@ -73,3 +73,5 @@ A C# WinForms application designed to manage student records, assessments, and e
 
 - **iText** for custom report generation
 
+- **NUnit** for unit and validation testing
+
